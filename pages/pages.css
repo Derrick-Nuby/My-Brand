@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    --mtext: #fefefe;
+    --btext: #000000;
+    --fcolor: #73A7F2;
+    --scolor: #10E956;
+    --bgcolor: #1A191D;
+
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    background-color: var(--bgcolor);
+    color: var(--mtext);
+}
+
+
+/* * {
+    border: red 1px solid;
+} */
+
+
+a {
+    color: var(--mtext);
+    text-decoration: none;
+}
+
+.code {
+    font-family: "Fira Code", monospace;
+    /* color: var(--scolor); */
+}
+
+header {
+    border-bottom: 3px solid var(--scolor);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 90px;
+}
+
+.logo {
+    color: var(--fcolor);
+    font-size: 35px;
+    font-weight: 500;
+    margin: 10px 0px;
+}
+
+#active {
+    color: var(--scolor);
+}
+
+.bars {
+    display: none;
+}
+.menu > a {
+    font-size: 22px;
+    color: var(--fcolor);
+}
+
+.menu {
+    display: flex;
+    gap: 30px;
+}
+
+.menu > a:hover {
+    color: var(--scolor);
+    font-size: 22.5px;
+    transition: ease-in 200ms;
+}
+
+
+
+main {
+    height: 100vh;
+}
+
+
+
+
+
+
+
+
+
+/* Footer */
+
+footer {
+    border-top: 3px solid var(--scolor);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 90px;
+    font-size: 22px;
+    font-weight: 500;
+}
+footer > a {
+    color: var(--fcolor);
+}
+
+
+/* responsiveness */
+
+/* Mobile devices */
+@media (max-width: 480px) {
+    body{
+        header {
+            background-color: red;
+            padding: 0px 20px;
+        }
+        .logo {
+            font-size: 18px;
+        }
+        .bars {
+            display: block;
+        }
+        .fa-bars {
+            color: var(--mtext);
+        }
+        .menu {
+            display: none;
+        }
+        footer{
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+}
+
+/* iPads, Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    body{
+        header {
+            background-color: yellow;
+            padding: 0px 20px;
+        }
+        .logo {
+            font-size: 24px;
+        }
+        .bars {
+            display: block;
+        }
+        .fa-bars {
+            color: var(--mtext);
+        }
+        .menu {
+            display: none;
+        }
+        footer{
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+}
+
+/* Small screens, laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body{
+        header {
+            background-color: blue;
+            padding: 0px 20px;
+        }
+        .logo {
+            font-size: 22px;
+        }
+        .menu > a {
+            font-size: 18px;
+        }
+    }
+}
