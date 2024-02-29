@@ -56,6 +56,28 @@ a {
     background-color: var(--scolor);
 }
 
+.line {
+    background-color: var(--scolor);
+    width: 100px;
+    height: 6px;
+    display: inline-block;
+}
+
+.stitle {
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--fcolor);
+}
+
+.sidetitle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.items {
+    padding: 0px 100px;
+}
 
 header {
     border-bottom: 3px solid var(--scolor);
@@ -123,21 +145,70 @@ header {
 }
 
 .herobtns {
-    margin: 50px 0px 50px 0px;
+    margin: 50px 0px 0px 0px;
 }
 
-.buttons:nth-child(2) {
+.second {
     margin-left: 55px;
 }
-
-
-
-
-
 
 .righthero > img {
     height: 30vw;
 }
+
+.scroll {
+    text-align: center;
+}
+
+.scroll img {
+    height: 3vw;
+    animation: bounce 700ms infinite;
+}
+
+.scroll img:hover {
+    cursor: pointer;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* about section homepage */
+
+.itemsabt {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    margin: 30px 0px 70px 0px;
+}
+
+.leftabt > img{
+    height: 30vw;
+    border-radius: 7px;
+}
+
+.rightabt {
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+/* portfolio section */
+
+.catbtns {
+    text-align: center;
+}
+
+
+
+
+
+
+
 
 
 
