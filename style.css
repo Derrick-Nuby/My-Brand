@@ -301,7 +301,7 @@ label {
 }
 
 input, textarea {
-    width: 100%;
+    width: 95%;
     background-color: var(--fcolor);
     color: var(--mtext);
     border-radius: 10px;
@@ -412,6 +412,12 @@ footer > a {
             flex-direction: column;
             text-align: center;
         }
+        .contactitems {
+            padding: 20px;
+            flex-direction: column;
+            gap: 10px;
+
+        }
     }
 }
 
@@ -464,6 +470,11 @@ footer > a {
         .articlesitems {
             flex-direction: column;
             text-align: center;
+        }
+        .contactitems {
+            padding: 20px;
+            flex-direction: column;
+            gap: 10px;
         }
     }
 }
