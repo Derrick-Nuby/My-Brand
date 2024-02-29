@@ -6,6 +6,7 @@
     --fcolor: #73A7F2;
     --scolor: #10E956;
     --bgcolor: #1A191D;
+    --hover: #4eda9a;
 
 }
 
@@ -33,8 +34,28 @@ a {
 
 .code {
     font-family: "Fira Code", monospace;
-    /* color: var(--scolor); */
 }
+
+.scolor {
+    color: var(--scolor);
+}
+
+.fcolor {
+    color: var(--fcolor);
+}
+
+.buttons {
+    background-color: var(--fcolor);
+    color: var(--btext);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 510;
+}
+
+.buttons:hover {
+    background-color: var(--scolor);
+}
+
 
 header {
     border-bottom: 3px solid var(--scolor);
@@ -74,15 +95,44 @@ header {
     transition: ease-in 200ms;
 }
 
+/* Hero section */
 
+.herosection {
+    display: flex;
+    padding: 50px 90px;
+}
 
-main {
-    height: 100vh;
+.hello {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.lefthero > h1 {
+    padding: 0px;
+    margin: 0px;
+    font-weight: 600;
+}
+
+.des {
+    letter-spacing: 2px;
+}
+
+.herobtns {
+    margin: 50px 0px 0px 0px;
+}
+
+.buttons:nth-child(2) {
+    margin-left: 55px;
 }
 
 
 
 
+
+
+.righthero > img {
+    height: 30vw;
+}
 
 
 
