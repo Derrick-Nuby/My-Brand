@@ -100,6 +100,7 @@ header {
 .herosection {
     display: flex;
     padding: 50px 90px;
+    gap: 70px;
 }
 
 .hello {
@@ -113,12 +114,16 @@ header {
     font-weight: 600;
 }
 
+.lefthero p {
+    padding-top: 20px;
+}
+
 .des {
     letter-spacing: 2px;
 }
 
 .herobtns {
-    margin: 50px 0px 0px 0px;
+    margin: 50px 0px 50px 0px;
 }
 
 .buttons:nth-child(2) {
@@ -179,6 +184,20 @@ footer > a {
             flex-direction: column;
             gap: 10px;
         }
+        .herosection {
+            padding: 20px;
+            flex-direction: column-reverse;
+            text-align: center;
+        }
+        .herosection h1 {
+            font-size: 25px;
+        }
+        .herosection p {
+            font-size: 18px;
+        }
+        .righthero > img {
+            height: 50vw;
+        }
     }
 }
 
@@ -204,6 +223,14 @@ footer > a {
         footer{
             flex-direction: column;
             gap: 10px;
+        }
+        .herosection {
+            padding: 20px 30px;
+            flex-direction: column-reverse;
+            text-align: center;
+        }
+        .righthero > img {
+            height: 50vw;
         }
     }
 }
