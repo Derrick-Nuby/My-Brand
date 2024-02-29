@@ -280,9 +280,58 @@ header {
 
 
 
+/* Contact form */
 
 
+.contactitems {
+    display: flex;
+    padding: 40px 100px;
+    gap: 15vw;
+    justify-content: space-between;
+}
 
+.leftcontact {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    margin: 10px 0px;
+}
+
+input, textarea {
+    width: 100%;
+    background-color: var(--fcolor);
+    color: var(--mtext);
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    padding: 10px 10px;
+    font-family: "Fira Code", monospace;
+    letter-spacing: 0px;
+    margin-bottom: 5px;
+}
+
+input:focus, textarea:focus {
+    background-color: #b9d4f9;
+    color: var(--btext);
+    border: var(--scolor) 1px solid;
+    outline: none;
+}
+
+input[type=submit] {
+    width: 50%;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 15px 0px;
+}
+
+input[type=submit]:hover {
+    color: black;
+    background-color: var(--hover);
+}
 
 
 
