@@ -168,6 +168,13 @@ header {
     justify-content: space-between;
 }
 
+.marticlesitems {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .article {
     background-color: var(--fcolor);
     padding: 16px;
@@ -188,6 +195,10 @@ header {
     display: flex;
     justify-content: center;
     margin: 20px;
+}
+.acontactitems {
+    display: flex;
+    justify-content: space-between;
 }
 
 .leftcontact {
@@ -238,6 +249,29 @@ input[type=submit]:hover {
 }
 
 
+/* articles page */
+.articlesection {
+    margin: 50px 0px;
+}
+
+.first-row {
+    display: flex;
+    margin: 0px 100px;
+    justify-content: space-between;
+    gap: 8vw;
+}
+
+.article > img {
+    width: 100%;
+}
+
+.pdtp {
+    margin-top: 5vw;
+}
+
+.artcontact {
+    margin: 0px 100px;
+}
 
 
 
@@ -292,9 +326,10 @@ footer > a {
             flex-direction: column;
             gap: 10px;
         }
-        .articlesitems {
+        .articlesitems, .marticlesitems {
             flex-direction: column;
             text-align: center;
+            margin: 0px 20px;
         }
         .aboutsectionitems {
             margin: 1px 20px;
@@ -305,6 +340,18 @@ footer > a {
         }
         .contactitems {
             padding: 20px;
+        }
+        .first-row {
+            flex-direction: column;
+            margin: 0px 20px;
+        }
+        .acontactitems {
+            padding: 20px;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .artcontact {
+            margin: 0px 20px;
         }
     }
 }
@@ -332,9 +379,10 @@ footer > a {
             flex-direction: column;
             gap: 10px;
         }
-        .articlesitems {
+        .articlesitems, .marticlesitems {
             flex-direction: column;
             text-align: center;
+            margin: 0px 20px;
         }
         .aboutsectionitems {
             margin: 1px 20px;
@@ -345,6 +393,18 @@ footer > a {
         }
         .contactitems {
             padding: 20px;
+        }
+        .first-row {
+            flex-direction: column;
+            margin: 0px 20px;
+        }
+        .acontactitems {
+            padding: 20px;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .artcontact {
+            margin: 0px 20px;
         }
     }
 }
