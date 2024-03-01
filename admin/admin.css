@@ -6,6 +6,7 @@
     --fcolor: #73A7F2;
     --scolor: #10E956;
     --bgcolor: #1A191D;
+    --hover: #4eda9a;
 
 }
 
@@ -33,7 +34,70 @@ a {
 
 .code {
     font-family: "Fira Code", monospace;
-    /* color: var(--scolor); */
+}
+
+.scolor {
+    color: var(--scolor);
+}
+
+.fcolor {
+    color: var(--fcolor);
+}
+
+.buttons {
+    background-color: var(--fcolor);
+    color: var(--btext);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 510;
+}
+
+.buttons:hover {
+    background-color: var(--scolor);
+}
+
+.line {
+    background-color: var(--scolor);
+    width: 7vw;
+    height: 0.5vw;
+    display: inline-block;
+}
+
+.stitle {
+    font-weight: 600;
+    font-size: 2.5vw;
+    color: var(--fcolor);
+}
+
+.sidetitle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.midtitle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+}
+
+.midline {
+    background-color: var(--scolor);
+    width: 33%;
+    height: 0.35vw;
+    display: inline-block;
+}
+
+.smidtitle {
+    font-weight: 600;
+    font-size: 3.2vw;
+    color: var(--fcolor);
+    text-align: center;
+}
+
+.link {
+    color: var(--scolor);
 }
 
 header {
@@ -76,13 +140,68 @@ header {
 
 
 
-main {
-    height: 100vh;
+/* forms */
+
+label {
+    display: block;
+    margin: 10px 0px;
 }
 
+input, textarea {
+    width: 100%;
+    background-color: var(--bgcolor);
+    color: var(--mtext);
+    border-radius: 10px;
+    border: 3px solid var(--fcolor);
+    font-size: 18px;
+    padding: 10px 10px;
+    font-family: "Fira Code", monospace;
+    letter-spacing: 0px;
+    margin-bottom: 5px;
+}
 
+input:focus, textarea:focus {
+    background-color: var(--btext2);
+    color: var(--fcolor);
+    border: var(--scolor) 1px solid;
+    outline: none;
+}
 
+input[type=submit] {
+    width: 40%;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 15px 0px;
+}
 
+input[type=submit]:hover {
+    color: var(--scolor);
+    background-color: var(--btext);
+}
+
+.formadmin {
+    margin: 10px 100px;
+}
+
+/* Messages */
+
+.commentform {
+    width: 30%;
+    padding: 0px 100px;
+}
+
+.comment {
+    border: var(--fcolor) 4px solid;
+    margin: 30px 100px;
+    font-weight: 300;
+    padding: 20px 50px;
+    border-radius: 10px;
+}
+
+.realcomments {
+    margin: 0px 100px;
+}
 
 
 
