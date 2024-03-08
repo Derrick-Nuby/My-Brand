@@ -254,10 +254,6 @@ input[type=submit]:hover {
     font-size: 14px;
     border-radius: 7px;
     cursor: pointer;
-    
-}
-
-#hiddenElement {
     display: none;
 }
 .ease-in-animation {

@@ -60,6 +60,13 @@
         <a href="">Account</a>
     </footer>
 
-    <script src="./pages.js"></script>
+    <script>
+        document.getElementById("loginButton").onclick = function() {
+            document.getElementById("hiddenElement").style.display = "block";
+        };
+        setTimeout(function() {
+            document.getElementById("hiddenElement").style.display = "none";
+        }, 60000);
+    </script>
 </body>
 </html>
