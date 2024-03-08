@@ -248,6 +248,26 @@ input[type=submit]:hover {
     background-color: var(--hover);
 }
 
+.boxerro {
+    border: 2px red solid;
+    width: 50%;
+    font-size: 14px;
+    border-radius: 7px;
+    cursor: pointer;
+    display: none;
+}
+.ease-in-animation {
+    animation: easeInAnimation 1s ease-in;
+}
+
+@keyframes easeInAnimation {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 
 /* articles page */
 .articlesection {

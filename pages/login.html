@@ -31,14 +31,20 @@
                 <h2 class="code smidtitle">Login</h2>
                 <p class="midline"></p>
             </div>
+            <center>
+                <div class="boxerro" id="hiddenElement">
+                    <p>Email must be 8 characters long and includes symbols; letters and numbers</p>
+                </div>
+            </center>
             <div class="contactitems">
                 <div class="righcontact">
+                    
                     <form action="" class="formcontact">
                         <label for="email">Email:</label>
                         <input type="email" name="email" id="email">
                         <label for="title">Password:</label>
                         <input type="password" name="title" id="ftitle">
-                        <center><input type="submit" value="Login"></center>
+                        <center><input type="submit" value="Login" id="loginButton"></center>
                     </form>
                     <p>if you do not have an account; Please <a href="./create.html" class="link">create an account</a></p>
                 </div>
@@ -54,5 +60,6 @@
         <a href="">Account</a>
     </footer>
 
+    <script src="./pages.js"></script>
 </body>
 </html>
