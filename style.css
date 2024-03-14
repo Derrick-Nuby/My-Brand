@@ -359,66 +359,81 @@ footer > a {
 /* Mobile devices */
 @media (max-width: 480px) {
     body{
-        header {
-            
-            padding: 0px 20px;
-        }
-        .logo {
-            font-size: 18px;
-        }
-        .bars {
-            display: block;
-        }
-        .fa-bars {
-            color: var(--mtext);
-        }
-        .menu {
-            display: none;
-        }
-        footer{
-            flex-direction: column;
-            gap: 10px;
-        }
-        .herosection {
-            padding: 20px;
-            flex-direction: column-reverse;
-            text-align: center;
-        }
-        .herosection h1 {
-            font-size: 25px;
-        }
-        .herosection p {
-            font-size: 18px;
-        }
-        .righthero > img {
-            height: 50vw;
-        }
-        .itemsabt {
-            text-align: center; 
-            flex-direction: column;
-            gap: 5px;
-            padding: 0px 20px;
-        }
-        .projects {
-            display: grid;
-            grid-template-columns: 100%;
-            gap: 50px;
-            margin: 40px;
-        }
-        .pflex {
-            flex-direction: column;
-        }
-        .articlesitems {
-            flex-direction: column;
-            text-align: center;
-        }
-        .contactitems {
-            padding: 20px;
-            flex-direction: column;
-            gap: 10px;
-
-        }
+        font-size: 14px;
+    
+    header {
+        padding: 0px 20px;
     }
+    .logo {
+        font-size: 18px;
+    }
+    .bars {
+        display: block;
+    }
+    .fa-bars {
+        color: var(--mtext);
+    }
+    .menu {
+        display: none;
+    }
+    footer{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .herosection {
+        padding: 20px;
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    .herosection h1 {
+        font-size: 25px;
+    }
+    .herosection p {
+        font-size: 18px;
+    }
+    .righthero > img {
+        height: 50vw;
+    }
+    .itemsabt {
+        text-align: center; 
+        flex-direction: column;
+        gap: 5px;
+        padding: 0px 20px;
+    }
+    .projects {
+        display: grid;
+        grid-template-columns: 100%;
+        gap: 50px;
+        margin: 40px;
+    }
+    .pflex {
+        flex-direction: column;
+    }
+    .articlesitems {
+        flex-direction: column;
+        text-align: center;
+    }
+    .contactitems {
+        padding: 20px;
+        flex-direction: column;
+        gap: 10px;
+
+    }
+    .catbtns {
+        text-align: center;
+    }
+    
+    .catbtns > a {
+        margin: 2px;
+    }
+    .buttons {
+        background-color: var(--fcolor);
+        color: var(--btext);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+};
 }
 
 /* iPads, Tablets */
@@ -475,6 +490,20 @@ footer > a {
             padding: 20px;
             flex-direction: column;
             gap: 10px;
+        }
+        .catbtns {
+            text-align: center;
+        }
+        
+        .catbtns > a {
+            margin: 2px;
+        }
+        .buttons {
+            background-color: var(--fcolor);
+            color: var(--btext);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
         }
     }
 }
