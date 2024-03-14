@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/9e43b5fe15.js" crossorigin="anonymous"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../images/favicon/site.webmanifest">
     <title>Create Your Account | Derrick NUBY</title>
     <link rel="stylesheet" href="./pages.css">
 </head>
@@ -14,9 +18,9 @@
         <div class="menu">
             <a href="../index.html">Home</a>
             <a href="./about.html">About Me</a>
-            <a href="./portfolio.html">Portfolio</a>
+            <a href="./articles.html">Articles</a>
             <a href="./contact.html" >Contact</a>
-            <a href="./login.html" id="active">Acount</a>
+            <a href="./login.html" id="active">Account</a>
 
         </div>
         <div class="bars">
@@ -31,20 +35,23 @@
                 <h2 class="code smidtitle">Create Account</h2>
                 <p class="midline"></p>
             </div>
+            <center>
+                <div class="boxerro" id="hiddenElement">
+                    <p>Email must be 8 characters long and includes symbols; letters and numbers</p>
+                </div>
+            </center>
             <div class="contactitems">
                 <div class="righcontact">
                     <form action="" class="formcontact">
                         <label for="names">Names</label>
-                        <input type="text" name="email" id="">
-                        <label for="phone">Phone:</label>
-                        <input type="tel" name="tel" id="">
+                        <input type="text" name="names" id="">
                         <label for="email">Email: </label>
                         <input type="email" name="email" id="email">
                         <label for="title">Password:</label>
                         <input type="password" name="title" id="ftitle">
                         <label for="title">Repeat Password:</label>
                         <input type="password" name="title" id="">
-                        <center><input type="submit" value="Login"></center>
+                        <center><input type="submit" value="Create"></center>
                     </form>
                     <p>if you do not have an account; Please click <a href="./login.html" class="link">Here And Login</a></p>
                 </div>
