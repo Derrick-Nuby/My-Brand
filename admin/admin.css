@@ -278,6 +278,43 @@ footer > a {
             flex-direction: column;
             gap: 10px;
         }
+        .buttons {
+            background-color: var(--fcolor);
+            color: var(--btext);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .commentform {
+            width: 90%;
+            padding: 5px;
+        }
+        .comment {
+            border: var(--fcolor) 4px solid;
+            margin: 30px 20px;
+            font-weight: 300;
+            padding: 5px 15px;
+            border-radius: 10px;
+        }
+        
+        .realcomments {
+            margin: 5px;
+        }
+        .articlesitems {
+            flex-direction: column;
+        }
+        
+        .marticlesitems {
+            flex-direction: column;
+        }
+        .article {
+            padding: 8px;
+        }
+        
+        .artitle {
+            font-size: 12px;
+            margin: 10px 0px;
+        }
     }
 }
 
