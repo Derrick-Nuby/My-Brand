@@ -36,21 +36,25 @@
                 <p class="midline"></p>
             </div>
             <center>
-                <div class="boxerro" id="hiddenElement">
-                    <p>Email must be 8 characters long and includes symbols; letters and numbers</p>
+                <div class="boxerro" id="errorElement">
+                    <p>Error</p>
                 </div>
             </center>
             <div class="contactitems">
                 <div class="righcontact">
                     
-                    <form action="" class="formcontact">
+                    <form action="" class="formcontact" id="userLoginForm">
                         <label for="email">Email:</label>
-                        <input type="email" name="email" id="email">
-                        <label for="title">Password:</label>
-                        <input type="password" name="title" id="ftitle">
-                        <center><input type="submit" value="Login" id="loginButton"></center>
+                        <input type="email" name="email" id="loginEmail">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="loginPassword">
+                        <center>
+                            <input type="submit" value="Login" onclick="userLogin(event)">
+                        </center>
+                        
                     </form>
                     <p>if you do not have an account; Please <a href="./create.html" class="link">create an account</a></p>
+                    <!-- <button >hello</button> -->
                 </div>
             </div>
         </div>
@@ -61,6 +65,8 @@
         <a href="./articles.html">Articles</a>
         <a href="./contact.html">contact</a>
         <a href="./login.html">Account</a>
+        <button onclick="logout()">Logout</button>
     </footer>
+<script src="./pages.js"></script>
 </body>
 </html>

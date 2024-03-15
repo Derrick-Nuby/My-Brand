@@ -36,22 +36,24 @@
                 <p class="midline"></p>
             </div>
             <center>
-                <div class="boxerro" id="hiddenElement">
-                    <p>Email must be 8 characters long and includes symbols; letters and numbers</p>
+                <div class="boxerro" id="errorElement">
+                    <p>Error</p>
                 </div>
             </center>
             <div class="contactitems">
                 <div class="righcontact">
-                    <form action="" class="formcontact">
+                    <form action="" class="formcontact" id="userCreationForm">
                         <label for="names">Names</label>
-                        <input type="text" name="names" id="">
+                        <input type="text" name="names" id="names">
                         <label for="email">Email: </label>
                         <input type="email" name="email" id="email">
-                        <label for="title">Password:</label>
-                        <input type="password" name="title" id="ftitle">
-                        <label for="title">Repeat Password:</label>
-                        <input type="password" name="title" id="">
-                        <center><input type="submit" value="Create"></center>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password">
+                        <label for="password">Repeat Password:</label>
+                        <input type="password" name="password" id="passwordval">
+                        <center>
+                            <input type="submit" value="Create" onclick="userCreation(event)">
+                        </center>
                     </form>
                     <p>if you do not have an account; Please click <a href="./login.html" class="link">Here And Login</a></p>
                 </div>
@@ -65,6 +67,6 @@
         <a href="./contact.html">contact</a>
         <a href="./login.html">Account</a>
     </footer>
-
+<script src="./pages.js"></script>
 </body>
 </html>

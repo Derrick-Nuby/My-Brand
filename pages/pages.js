@@ -1,7 +1,7 @@
 let errorElement = document.getElementById("errorElement");
 
 
-document.getElementById("userCreationForm").addEventListener("submit", userCreation);
+// document.getElementById("userCreationForm").addEventListener("submit", userCreation);
 
 
 function userCreation(event) {
@@ -30,6 +30,7 @@ function userCreation(event) {
         showError("Ooops :( Passwords do not match!");
         return;
     }
+    
     var users = JSON.parse(localStorage.getItem('users')) || {};
     for (var userId in users) {
         if (users.hasOwnProperty(userId)) {
@@ -47,7 +48,8 @@ function userCreation(event) {
         id: userId,
         names: names,
         email: email,
-        password: password
+        password: password,
+        role: 0
     };
 
     var users = JSON.parse(localStorage.getItem('users')) || {};
@@ -57,9 +59,14 @@ function userCreation(event) {
 
     localStorage.setItem('users', JSON.stringify(users));
     
-    alert("User created successfully with ID: " + userId);
+    // alert("User created successfully with ID: " + userId);
+    var errorParagraph = errorElement.querySelector("p");
+    errorParagraph.textContent = "User created successfully with ID: " + userId;    
+    errorElement.style.display = "block";
+    setTimeout(function() {
+        errorElement.style.display = "none";
+    }, 5000);
 
-    document.getElementById("userForm").reset();
 };
 
 function showError(message, duration = 4000) {
@@ -69,4 +76,65 @@ function showError(message, duration = 4000) {
     setTimeout(function() {
         errorElement.style.display = "none";
     }, duration);
+}
+
+
+// login functionalities
+
+// document.getElementById("userLoginForm").addEventListener("submit", userLogin);
+
+
+// function userLogin() {
+//     event.preventDefault();
+//     alert("logged in successfully");
+// }
+
+function userLogin() {
+    event.preventDefault();
+
+    var loginEmail = document.getElementById("loginEmail").value;
+    var loginPassword = document.getElementById("loginPassword").value;
+
+    if(loginEmail.trim() === '' || loginPassword === '') {
+        showError("Your forgot to fill some fields | All fields are required!");
+        return;
+    }
+
+    var users = JSON.parse(localStorage.getItem('users')) || {};
+
+    var user = Object.values(users).find(user => user.email === loginEmail && user.password === loginPassword);
+
+    if (user) {
+        alert("Logged in successfully!");
+
+        document.cookie = `loggedInUser=${user.id}; expires=${new Date(Date.now() + 3600 * 1000)}; path=/`;
+
+        window.location.href = "../index.html";
+    } 
+
+    else {
+        var emailExists = Object.values(users).some(user => user.email === loginEmail);
+        
+        if (!emailExists) {
+            showError("That user does not exist in our database");
+            return;
+        }
+        
+        showError("Invalid email or password.");
+    }
+}
+
+function logout() {
+    document.cookie = "loggedInUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+    window.location.href = "../index.html";
+}
+
+
+function getLoggedUserInfo() {
+
+    var loggedInUserId = getCookie("loggedInUser");
+    var loggedInUser = users[loggedInUserId];
+    console.log(loggedInUser);
+
 }

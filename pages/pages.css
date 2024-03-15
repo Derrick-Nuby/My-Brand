@@ -254,19 +254,9 @@ input[type=submit]:hover {
     font-size: 14px;
     border-radius: 7px;
     cursor: pointer;
-}
-.ease-in-animation {
-    animation: easeInAnimation 1s ease-in;
+    display: none;
 }
 
-@keyframes easeInAnimation {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
 
 /* articles page */
 .articlesection {
