@@ -3,6 +3,8 @@ import mongoose from "mongoose"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import userRoutes from "./routes/auth"
+import articleRoutes from "./routes/article"
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -14,6 +16,8 @@ app.use(cors())
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api/user', userRoutes)
+app.use('/api/article', articleRoutes)
+
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/Brand-DB';
 

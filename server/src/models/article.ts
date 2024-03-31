@@ -20,9 +20,9 @@ const articleSchema: Schema = new Schema(
     description: {
         type: String,
     },
-    comments: [commentSchema],
+    comments: [String],
 
-    likes: [likeSchema]
+    likes: [String]
 }
 );
 

@@ -15,7 +15,7 @@ const articleSchema = new mongoose_1.Schema({
     description: {
         type: String,
     },
-    comments: [commentSchema],
-    likes: [likeSchema]
+    comments: [String],
+    likes: [String]
 });
 exports.default = (0, mongoose_1.model)("Artcile", articleSchema);
