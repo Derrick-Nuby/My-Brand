@@ -56,7 +56,7 @@ const getSingleArticle = (req, res) => __awaiter(void 0, void 0, void 0, functio
         const articleId = req.params.id;
         const singleArticle = yield article_1.default.findOne({ _id: articleId });
         if (!singleArticle) {
-            return res.status(404).json({ message: "That article doesn't exist on our database" });
+            res.status(404).json({ message: "That article doesn't exist on our database" });
         }
         res.status(200).json({ singleArticle });
     }

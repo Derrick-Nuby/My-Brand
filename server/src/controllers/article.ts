@@ -52,7 +52,7 @@ const getSingleArticle = async (req: Request, res: Response): Promise<any> => {
         const singleArticle: IArticle | null = await Article.findOne( { _id: articleId });
 
         if(!singleArticle) {
-            res.status(404).json({ message: "That article doesn't exist on our database"})
+            return res.status(404).json({ message: "That article doesn't exist on our database"})
         }
 
         res.status(200).json({ singleArticle })

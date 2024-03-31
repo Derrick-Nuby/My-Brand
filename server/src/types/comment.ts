@@ -1,5 +1,5 @@
 import { Document } from "mongoose"
-export interface IArticle extends Document {
+export interface IComment extends Document {
     authorId: string
     authorName: string
     blogId: string
