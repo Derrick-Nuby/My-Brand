@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import userRoutes from "./routes/auth"
 import articleRoutes from "./routes/article"
 import commentRoutes from "./routes/comment"
+import likeRoutes from "./routes/like"
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use('/api/user', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/comment', commentRoutes)
+app.use('/api/like', likeRoutes)
 
 
 
@@ -29,7 +31,7 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }
-
+ 
 mongoose
   .connect(uri)
   .then(() =>
