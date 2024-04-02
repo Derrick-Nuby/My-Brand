@@ -1,20 +1,20 @@
 import { Router } from "express"
 import { getAllArticles, createArticle, getSingleArticle, updateArticle, deleteArticle } from '../controllers/article'
-import { validateUserRegister, validateUserLogin, validateUserUpdate } from '../middleware/validation';
+import { validateCreateArticle } from '../middleware/articleValidation';
 import { adminAuthJWT, userAuthJWT } from '../middleware/auth';
 
 
 const router: Router = Router()
 
 
-router.get("/", getAllArticles)
+router.get("/", userAuthJWT, getAllArticles)
 
-router.post("/", createArticle)
+router.post("/", adminAuthJWT, validateCreateArticle, createArticle)
 
-router.get("/:id", getSingleArticle)
+router.get("/:id", userAuthJWT, getSingleArticle)
 
-router.put("/:id", updateArticle)
+router.put("/:id", adminAuthJWT, updateArticle)
 
-router.delete("/:id", deleteArticle)
+router.delete("/:id", adminAuthJWT, deleteArticle)
 
 export default router

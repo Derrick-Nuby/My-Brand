@@ -3,13 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const likeSchema = new mongoose_1.Schema({
     authorId: {
-        type: String,
+        type: mongoose_1.Types.ObjectId,
+        ref: 'User',
     },
     authorName: {
         type: String,
     },
     blogId: {
-        type: String,
+        type: mongoose_1.Types.ObjectId,
+        ref: 'Article',
     },
     liked: {
         type: Boolean,

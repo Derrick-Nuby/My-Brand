@@ -1,5 +1,5 @@
 import { IArticle } from "./../types/article";
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 const articleSchema: Schema = new Schema(
 {
@@ -11,18 +11,29 @@ const articleSchema: Schema = new Schema(
         type: String,
     },
 
+    authorId: {
+        type: Types.ObjectId,
+        ref: 'User',
+    },
+
     author: {
         type: String,
     },
 
-    tags: [String],
+    tags: {
+        type: String,
+    },
 
     description: {
         type: String,
     },
-    comments: [String],
+    comments: {
+        type: String,
+    },
 
-    likes: [String]
+    likes: {
+        type: String,
+    },
 }
 );
 

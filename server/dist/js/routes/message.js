@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const message_1 = require("../controllers/message");
+const messageValidation_1 = require("../middleware/messageValidation");
+const router = (0, express_1.Router)();
+router.get("/", message_1.getAllMessages);
+router.post("/", messageValidation_1.validateMessage, message_1.createMessage);
+router.get("/:id", message_1.getSingleMessage);
+router.delete("/:id", message_1.deleteMessage);
+exports.default = router;

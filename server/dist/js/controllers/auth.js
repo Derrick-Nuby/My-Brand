@@ -80,6 +80,7 @@ const modifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const userId = req.userId;
         const updateFields = req.body;
+        const { name, phone, email, password } = req.body;
         // Check if the 'password' field is being updated
         if (updateFields.password) {
             // Hash the new password
@@ -92,7 +93,11 @@ const modifyUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
         res.status(200).json({
             message: 'User updated',
-            user: updatedUser,
+            user: {
+                name: name,
+                phone: phone,
+                email: email,
+            }
         });
     }
     catch (error) {
@@ -136,8 +141,19 @@ exports.logoutUser = logoutUser;
 const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userId = req.userId;
-        const users = yield user_1.default.find({ _id: userId });
-        res.status(200).json({ users });
+        const user = yield user_1.default.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        const { _id, name, phone, email } = user;
+        res.status(200).json({
+            user: {
+                _id,
+                name,
+                phone,
+                email,
+            }
+        });
     }
     catch (error) {
         throw error;

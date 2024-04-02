@@ -22,11 +22,14 @@ const getAllComments = async (req: Request, res: Response): Promise<any> => {
 
 const createComment = async (req: Request, res: Response): Promise<any> => {
     try {
-        const body = req.body as Pick<IComment, "authorId" | "authorName" | "blogId" | "content">
+        const body = req.body as Pick<IComment, "blogId" | "content">
+
+        const userId = req.userId;
+        const lUsername = req.lUsername;
 
         const comment: IComment = new Comment({
-            authorId: body.authorId,
-            authorName: body.authorName,
+            authorId: userId,
+            authorName: lUsername,
             blogId: body.blogId,
             content: body.content,
         })
@@ -83,9 +86,8 @@ const deleteComment = async (req: Request, res: Response): Promise<any> => {
     try {
 
         const CommentId = req.params.id;
-        const updateFields = req.body;
 
-        const deletedComment: IComment | null = await Comment.findOneAndUpdate( { _id: CommentId }, updateFields, { new: true });
+        const deletedComment: IComment | null = await Comment.findOneAndDelete( { _id: CommentId });
 
         if (!deletedComment) {
             res.status(404).json({ message: "That Comment doesn't exist in our database" });

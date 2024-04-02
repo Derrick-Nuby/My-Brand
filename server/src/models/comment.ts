@@ -1,10 +1,11 @@
 import { IComment } from "./../types/comment";
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 const commentSchema: Schema = new Schema(
 {
     authorId: {
-        type: String,
+        type: Types.ObjectId,
+        ref: 'User',
     },
 
     authorName: {
@@ -12,7 +13,8 @@ const commentSchema: Schema = new Schema(
     },
 
     blogId: {
-        type: String,
+        type: Types.ObjectId,
+        ref: 'Article',
     },
 
     content: {

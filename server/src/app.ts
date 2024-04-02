@@ -6,6 +6,8 @@ import userRoutes from "./routes/auth"
 import articleRoutes from "./routes/article"
 import commentRoutes from "./routes/comment"
 import likeRoutes from "./routes/like"
+import messageRoutes from "./routes/message"
+
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -21,6 +23,8 @@ app.use('/api/user', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/comment', commentRoutes)
 app.use('/api/like', likeRoutes)
+app.use('/api/message', messageRoutes)
+
 
 
 

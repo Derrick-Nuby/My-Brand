@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { createAccount, loginUser, getAllUsers, modifyUser, deleteUser, logoutUser, getSingleUser } from "../controllers/auth"
-import { validateUserRegister, validateUserLogin, validateUserUpdate } from '../middleware/validation';
+import { validateUserRegister, validateUserLogin, validateUserUpdate } from '../middleware/userValidation';
 import { adminAuthJWT, userAuthJWT } from '../middleware/auth';
 
 const router: Router = Router()

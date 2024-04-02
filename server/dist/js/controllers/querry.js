@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteComment = exports.updateComment = exports.getSingleComment = exports.createComment = exports.getAllComments = void 0;
+exports.deleteComment = exports.getSingleComment = exports.createComment = exports.getAllContacts = void 0;
 const comment_1 = __importDefault(require("../models/comment"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const getAllComments = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllContacts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const comments = yield comment_1.default.find();
         if (comments.length === 0) {
@@ -28,7 +28,7 @@ const getAllComments = (req, res) => __awaiter(void 0, void 0, void 0, function*
         throw error;
     }
 });
-exports.getAllComments = getAllComments;
+exports.getAllContacts = getAllContacts;
 const createComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
@@ -64,26 +64,11 @@ const getSingleComment = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.getSingleComment = getSingleComment;
-const updateComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const CommentId = req.params.id;
-        const updateFields = req.body;
-        const updatedComment = yield comment_1.default.findOneAndUpdate({ _id: CommentId }, updateFields, { new: true });
-        if (!updatedComment) {
-            res.status(404).json({ message: "That Comment doesn't exist in our database" });
-            return;
-        }
-        res.status(200).json({ message: "Comment Updated successfully", updatedComment });
-    }
-    catch (error) {
-        throw error;
-    }
-});
-exports.updateComment = updateComment;
 const deleteComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const CommentId = req.params.id;
-        const deletedComment = yield comment_1.default.findOneAndDelete({ _id: CommentId });
+        const updateFields = req.body;
+        const deletedComment = yield comment_1.default.findOneAndUpdate({ _id: CommentId }, updateFields, { new: true });
         if (!deletedComment) {
             res.status(404).json({ message: "That Comment doesn't exist in our database" });
             return;

@@ -11,6 +11,7 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const article_1 = __importDefault(require("./routes/article"));
 const comment_1 = __importDefault(require("./routes/comment"));
 const like_1 = __importDefault(require("./routes/like"));
+const message_1 = __importDefault(require("./routes/message"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -22,6 +23,7 @@ app.use('/api/user', auth_1.default);
 app.use('/api/article', article_1.default);
 app.use('/api/comment', comment_1.default);
 app.use('/api/like', like_1.default);
+app.use('/api/message', message_1.default);
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/Brand-DB';
 const options = {
     useNewUrlParser: true,

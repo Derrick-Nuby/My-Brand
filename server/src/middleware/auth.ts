@@ -9,7 +9,8 @@ const jwtSecret = process.env.JWT_SECRET || 'defaultSecret';
 declare global {
   namespace Express {
     interface Request {
-      userId?: string; // Define the userId property as optional
+      userId?: string;
+      lUsername?: string;
       isAdmin?: boolean;
     }
   }
@@ -23,13 +24,14 @@ const userAuthJWT = (req: Request, res: Response, next: NextFunction) => {
       if (err) {
         return res.status(403).json({ message: 'Failed to authenticate token' });
       }
-      const { id, username, email } = decoded;
+      const { id, username, isAdmin } = decoded;
       req.userId = id;
-      req.isAdmin = decoded.isAdmin;
+      req.lUsername = username;
+      req.isAdmin = isAdmin;
       next();
     });
   } else {
-    res.status(401).json({ message: 'No token provided' });
+    res.status(401).json({ message: 'You need to login to access this resource; Please login or create an account' });
   }
 };
 
@@ -41,8 +43,9 @@ const adminAuthJWT = (req: Request, res: Response, next: NextFunction) => {
       if (err) {
         return res.status(403).json({ message: 'Failed to authenticate token' });
       }
-      const { id, username, email, isAdmin } = decoded;
+      const { id, username, isAdmin } = decoded;
       req.userId = id;
+      req.lUsername = username;
       req.isAdmin = isAdmin;
 
       if (!isAdmin) {
@@ -51,7 +54,7 @@ const adminAuthJWT = (req: Request, res: Response, next: NextFunction) => {
       next();
     });
   } else {
-    res.status(401).json({ message: 'No token provided' });
+    res.status(401).json({ message: 'You need to login to access this resource; Please login or create an account' });
   }
 };
 

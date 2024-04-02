@@ -21,11 +21,14 @@ const getAllLikes = async (req: Request, res: Response): Promise<any> => {
 
 const createLike = async (req: Request, res: Response): Promise<any> => {
     try {
-        const body = req.body as Pick<ILike, "authorId" | "authorName" | "blogId" | "liked">
+        const body = req.body as Pick<ILike, "blogId" | "liked">
+
+        const userId = req.userId;
+        const lUsername = req.lUsername;
 
         const like: ILike = new Like({
-            authorId: body.authorId,
-            authorName: body.authorName,
+            authorId: userId,
+            authorName: lUsername,
             blogId: body.blogId,
             content: body.liked,
         })
@@ -65,9 +68,8 @@ const deleteLike = async (req: Request, res: Response): Promise<any> => {
     try {
 
         const likeID = req.params.id;
-        const updateFields = req.body;
 
-        const deletedLike: ILike | null = await Like.findOneAndUpdate( { _id: likeID }, updateFields, { new: true });
+        const deletedLike: ILike | null = await Like.findOneAndDelete( { _id: likeID });
 
         if (!deletedLike) {
             res.status(404).json({ message: "That like doesn't exist in our database" });

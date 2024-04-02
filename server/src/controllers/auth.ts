@@ -84,6 +84,7 @@ const modifyUser = async (req: Request, res: Response): Promise<any> => {
   try {
     const userId = req.userId;
     const updateFields = req.body;
+    const { name, phone, email, password } = req.body;
 
     // Check if the 'password' field is being updated
     if (updateFields.password) {
@@ -104,7 +105,11 @@ const modifyUser = async (req: Request, res: Response): Promise<any> => {
 
     res.status(200).json({
       message: 'User updated',
-      user: updatedUser,
+      user: {
+        name: name,
+        phone: phone,
+        email: email,
+      }
     });
   } catch (error) {
     console.error('Error updating user:', error);
@@ -154,8 +159,24 @@ const logoutUser = (req: Request, res: Response): void => {
 const getSingleUser = async (req: Request, res: Response): Promise<any> => {
   try {
     const userId = req.userId;
-    const users: IUser[] = await User.find( { _id: userId } );
-    res.status(200).json({ users })
+    const user: IUser | null = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const { _id, name, phone, email } = user;
+    
+    res.status(200).json(
+      {
+        user: {
+          _id,
+          name,
+          phone,
+          email,
+        }
+      }
+    );
   } catch (error) {
     throw error
   }

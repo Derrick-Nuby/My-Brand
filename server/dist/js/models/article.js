@@ -8,14 +8,24 @@ const articleSchema = new mongoose_1.Schema({
     title: {
         type: String,
     },
+    authorId: {
+        type: mongoose_1.Types.ObjectId,
+        ref: 'User',
+    },
     author: {
         type: String,
     },
-    tags: [String],
+    tags: {
+        type: String,
+    },
     description: {
         type: String,
     },
-    comments: [String],
-    likes: [String]
+    comments: {
+        type: String,
+    },
+    likes: {
+        type: String,
+    },
 });
 exports.default = (0, mongoose_1.model)("Artcile", articleSchema);

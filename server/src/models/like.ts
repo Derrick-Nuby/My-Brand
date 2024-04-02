@@ -1,10 +1,11 @@
 import { ILike } from "./../types/like";
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 const likeSchema: Schema = new Schema(
 {
     authorId: {
-        type: String,
+        type: Types.ObjectId,
+        ref: 'User',
     },
 
     authorName: {
@@ -12,7 +13,8 @@ const likeSchema: Schema = new Schema(
     },
 
     blogId: {
-        type: String,
+        type: Types.ObjectId,
+        ref: 'Article',
     },
 
     liked: {

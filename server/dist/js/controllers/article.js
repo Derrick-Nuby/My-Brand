@@ -32,10 +32,13 @@ exports.getAllArticles = getAllArticles;
 const createArticle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
+        const userId = req.userId;
+        const lUsername = req.lUsername;
         const article = new article_1.default({
             image: body.image,
             title: body.title,
-            author: body.author,
+            authorId: userId,
+            author: lUsername,
             tags: body.tags,
             description: body.description,
             comments: body.comments,
@@ -84,8 +87,7 @@ exports.updateArticle = updateArticle;
 const deleteArticle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const articleId = req.params.id;
-        const updateFields = req.body;
-        const deletedArticle = yield article_1.default.findOneAndUpdate({ _id: articleId }, updateFields, { new: true });
+        const deletedArticle = yield article_1.default.findOneAndDelete({ _id: articleId });
         if (!deletedArticle) {
             res.status(404).json({ message: "That article doesn't exist in our database" });
             return;

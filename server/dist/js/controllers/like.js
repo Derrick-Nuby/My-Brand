@@ -30,9 +30,11 @@ exports.getAllLikes = getAllLikes;
 const createLike = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
+        const userId = req.userId;
+        const lUsername = req.lUsername;
         const like = new like_1.default({
-            authorId: body.authorId,
-            authorName: body.authorName,
+            authorId: userId,
+            authorName: lUsername,
             blogId: body.blogId,
             content: body.liked,
         });
@@ -65,8 +67,7 @@ exports.updateLike = updateLike;
 const deleteLike = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const likeID = req.params.id;
-        const updateFields = req.body;
-        const deletedLike = yield like_1.default.findOneAndUpdate({ _id: likeID }, updateFields, { new: true });
+        const deletedLike = yield like_1.default.findOneAndDelete({ _id: likeID });
         if (!deletedLike) {
             res.status(404).json({ message: "That like doesn't exist in our database" });
             return;

@@ -15,14 +15,15 @@ const userAuthJWT = (req, res, next) => {
             if (err) {
                 return res.status(403).json({ message: 'Failed to authenticate token' });
             }
-            const { id, username, email } = decoded;
+            const { id, username, isAdmin } = decoded;
             req.userId = id;
-            req.isAdmin = decoded.isAdmin;
+            req.lUsername = username;
+            req.isAdmin = isAdmin;
             next();
         });
     }
     else {
-        res.status(401).json({ message: 'No token provided' });
+        res.status(401).json({ message: 'You need to login to access this resource; Please login or create an account' });
     }
 };
 exports.userAuthJWT = userAuthJWT;
@@ -33,8 +34,9 @@ const adminAuthJWT = (req, res, next) => {
             if (err) {
                 return res.status(403).json({ message: 'Failed to authenticate token' });
             }
-            const { id, username, email, isAdmin } = decoded;
+            const { id, username, isAdmin } = decoded;
             req.userId = id;
+            req.lUsername = username;
             req.isAdmin = isAdmin;
             if (!isAdmin) {
                 return res.status(403).json({ message: 'You are not allowed to access this resource, Please contact the site administrator for assistance' });
@@ -43,7 +45,7 @@ const adminAuthJWT = (req, res, next) => {
         });
     }
     else {
-        res.status(401).json({ message: 'No token provided' });
+        res.status(401).json({ message: 'You need to login to access this resource; Please login or create an account' });
     }
 };
 exports.adminAuthJWT = adminAuthJWT;

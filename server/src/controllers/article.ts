@@ -22,12 +22,16 @@ const getAllArticles = async (req: Request, res: Response): Promise<any> => {
 
 const createArticle = async (req: Request, res: Response): Promise<any> => {
     try {
-        const body = req.body as Pick<IArticle, "image" | "title" | "author" | "tags" | "description" | "comments" | "likes">
+        const body = req.body as Pick<IArticle, "image" | "title" | "tags" | "description" | "comments" | "likes">
+
+        const userId = req.userId;
+        const lUsername = req.lUsername;
 
         const article: IArticle = new Article({
             image: body.image,
             title: body.title,
-            author: body.author,
+            authorId: userId,
+            author: lUsername,
             tags: body.tags,
             description: body.description,
             comments: body.comments,
@@ -86,9 +90,8 @@ const deleteArticle = async (req: Request, res: Response): Promise<any> => {
     try {
 
         const articleId = req.params.id;
-        const updateFields = req.body;
 
-        const deletedArticle: IArticle | null = await Article.findOneAndUpdate( { _id: articleId }, updateFields, { new: true });
+        const deletedArticle: IArticle | null = await Article.findOneAndDelete( { _id: articleId });
 
         if (!deletedArticle) {
             res.status(404).json({ message: "That article doesn't exist in our database" });

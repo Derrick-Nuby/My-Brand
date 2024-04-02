@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { getAllLikes, createLike, updateLike, deleteLike } from '../controllers/like'
-import { validateUserRegister, validateUserLogin, validateUserUpdate } from '../middleware/validation';
+import { validateUserRegister, validateUserLogin, validateUserUpdate } from '../middleware/userValidation';
 import { adminAuthJWT, userAuthJWT } from '../middleware/auth';
 
 
@@ -9,10 +9,10 @@ const router: Router = Router()
 
 router.get("/", getAllLikes)
 
-router.post("/", createLike)
+router.post("/", userAuthJWT, createLike)
 
-router.put("/:id", updateLike)
+router.put("/:id", userAuthJWT, updateLike)
 
-router.delete("/:id", deleteLike)
+router.delete("/:id", userAuthJWT, deleteLike)
 
 export default router
