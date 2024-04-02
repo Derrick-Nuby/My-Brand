@@ -4,7 +4,15 @@ import { validateCreateArticle } from '../middleware/articleValidation';
 import { adminAuthJWT, userAuthJWT } from '../middleware/auth';
 import multer from 'multer';
 
-const upload = multer({ dest: 'uploads/' });
+
+const storage = multer.diskStorage({
+    destination: 'uploads/',
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 const router: Router = Router()
 
