@@ -3,6 +3,7 @@ import { IMessage } from "../types/message"
 import Message from "../models/message"
 import dotenv from 'dotenv';
 dotenv.config();
+import nodemailer from 'nodemailer';
 
 const getAllMessages = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -34,6 +35,35 @@ const createMessage = async (req: Request, res: Response): Promise<any> => {
         })
 
         const newMessage: IMessage = await message.save()
+
+// nodemailer section
+
+        const transporter = nodemailer.createTransport({
+            host: process.env.mailHost,
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.adminEmail,
+                pass: process.env.adminPass
+            }
+        });
+
+        const mailOptions = {
+            from: body.email,
+            to: process.env.adminEmail,
+            subject: body.subject,
+            text: `Phone Number: ${body.phone}\nMessage: ${body.message}`,
+            replyTo: body.email
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+                res.status(500).json({ error: "Error sending email" });
+            }
+        });
+
+
 
         res
         .status(201)

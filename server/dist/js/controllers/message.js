@@ -16,6 +16,7 @@ exports.deleteMessage = exports.getSingleMessage = exports.createMessage = expor
 const message_1 = __importDefault(require("../models/message"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+const nodemailer_1 = __importDefault(require("nodemailer"));
 const getAllMessages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const messages = yield message_1.default.find();
@@ -40,6 +41,29 @@ const createMessage = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             message: body.message,
         });
         const newMessage = yield message.save();
+        // nodemailer section
+        const transporter = nodemailer_1.default.createTransport({
+            host: process.env.mailHost,
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.adminEmail,
+                pass: process.env.adminPass
+            }
+        });
+        const mailOptions = {
+            from: body.email,
+            to: process.env.adminEmail,
+            subject: body.subject,
+            text: `Phone Number: ${body.phone}\nMessage: ${body.message}`,
+            replyTo: body.email
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+                res.status(500).json({ error: "Error sending email" });
+            }
+        });
         res
             .status(201)
             .json({ message: "Message created successfully", Message: newMessage });

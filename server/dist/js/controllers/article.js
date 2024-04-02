@@ -16,6 +16,12 @@ exports.deleteArticle = exports.updateArticle = exports.getSingleArticle = expor
 const article_1 = __importDefault(require("../models/article"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+const cloudinary_1 = __importDefault(require("cloudinary"));
+cloudinary_1.default.v2.config({
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret
+});
 const getAllArticles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const articles = yield article_1.default.find();
@@ -34,8 +40,12 @@ const createArticle = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const body = req.body;
         const userId = req.userId;
         const lUsername = req.lUsername;
+        if (!req.file) {
+            return res.status(400).json({ error: "Image file is missing" });
+        }
+        const cloudinaryResponse = yield cloudinary_1.default.v2.uploader.upload(req.file.path, { folder: 'brandImages' });
         const article = new article_1.default({
-            image: body.image,
+            image: cloudinaryResponse.secure_url,
             title: body.title,
             authorId: userId,
             author: lUsername,
@@ -48,9 +58,11 @@ const createArticle = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res
             .status(201)
             .json({ message: "Article created successfully", article: newArticle });
+        // next();
     }
     catch (error) {
-        throw error;
+        console.error('Error creating article:', error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 exports.createArticle = createArticle;

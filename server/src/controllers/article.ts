@@ -1,8 +1,17 @@
-import { Response, Request } from "express"
+import { Response, Request, NextFunction  } from "express"
 import { IArticle } from "../types/article"
 import Article from "../models/article"
 import dotenv from 'dotenv';
+import multer from 'multer';
 dotenv.config();
+import cloudinary from 'cloudinary';
+
+cloudinary.v2.config({
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret
+});
+
 
 const getAllArticles = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -22,13 +31,20 @@ const getAllArticles = async (req: Request, res: Response): Promise<any> => {
 
 const createArticle = async (req: Request, res: Response): Promise<any> => {
     try {
-        const body = req.body as Pick<IArticle, "image" | "title" | "tags" | "description" | "comments" | "likes">
+        const body = req.body as Pick<IArticle, "title" | "tags" | "description" | "comments" | "likes">
 
         const userId = req.userId;
         const lUsername = req.lUsername;
 
+        if (!req.file) {
+            return res.status(400).json({ error: "Image file is missing" });
+        }
+
+        const cloudinaryResponse = await cloudinary.v2.uploader.upload(req.file.path, { folder: 'brandImages' });
+
+
         const article: IArticle = new Article({
-            image: body.image,
+            image: cloudinaryResponse.secure_url,
             title: body.title,
             authorId: userId,
             author: lUsername,
@@ -43,9 +59,10 @@ const createArticle = async (req: Request, res: Response): Promise<any> => {
       res
         .status(201)
         .json({ message: "Article created successfully", article: newArticle})
-
+        // next();
     } catch (error) {
-    throw error
+        console.error('Error creating article:', error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 }
 

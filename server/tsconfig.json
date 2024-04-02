@@ -2,6 +2,7 @@
     "compilerOptions": {
       "target": "es6",
       "module": "commonjs",
+      "types": ["node", "multer"],
       "outDir": "dist/js",
       "rootDir": "src",
       "strict": true,
