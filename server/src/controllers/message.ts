@@ -1,6 +1,6 @@
 import { Response, Request } from "express"
-import { IMessage } from "../types/message"
-import Message from "../models/message"
+import { IMessage } from "../types/message.js"
+import Message from "../models/message.js"
 import dotenv from 'dotenv';
 dotenv.config();
 import nodemailer from 'nodemailer';

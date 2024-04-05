@@ -1,7 +1,7 @@
 import { Router } from "express"
-import { getAllArticles, createArticle, getSingleArticle, updateArticle, deleteArticle } from '../controllers/article'
-import { validateCreateArticle } from '../middleware/articleValidation';
-import { adminAuthJWT, userAuthJWT } from '../middleware/auth';
+import { getAllArticles, createArticle, getSingleArticle, updateArticle, deleteArticle } from '../controllers/article.js'
+import { validateCreateArticle } from '../middleware/articleValidation.js';
+import { adminAuthJWT, userAuthJWT } from '../middleware/auth.js';
 import multer from 'multer';
 
 
@@ -17,7 +17,7 @@ const upload = multer({ storage: storage });
 const router: Router = Router()
 
 
-router.get("/", userAuthJWT, getAllArticles)
+router.get("/", getAllArticles)
 
 router.post("/", adminAuthJWT, upload.single('image'), createArticle)
 

@@ -1,7 +1,7 @@
 import { Router } from "express"
-import { getAllComments, createComment, getSingleComment, updateComment, deleteComment } from '../controllers/comment'
-import { validateComment } from '../middleware/commentValidation';
-import { adminAuthJWT, userAuthJWT } from '../middleware/auth';
+import { getAllComments, createComment, getSingleComment, updateComment, deleteComment } from '../controllers/comment.js'
+import { validateComment } from '../middleware/commentValidation.js';
+import { adminAuthJWT, userAuthJWT } from '../middleware/auth.js';
 
 
 const router: Router = Router()

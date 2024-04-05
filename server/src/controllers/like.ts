@@ -1,6 +1,6 @@
 import { Response, Request } from "express"
-import { ILike } from "../types/like"
-import Like from "../models/like"
+import { ILike } from "../types/like.js"
+import Like from "../models/like.js"
 
 
 const getAllLikes = async (req: Request, res: Response): Promise<any> => {

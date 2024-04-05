@@ -1,6 +1,6 @@
 import { Response, Request, NextFunction  } from "express"
-import { IArticle } from "../types/article"
-import Article from "../models/article"
+import { IArticle } from "../types/article.js"
+import Article from "../models/article.js"
 import dotenv from 'dotenv';
 import multer from 'multer';
 dotenv.config();

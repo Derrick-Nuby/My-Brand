@@ -1,6 +1,6 @@
 import { Response, Request } from "express"
-import { IComment } from "../types/comment"
-import Comment from "../models/comment"
+import { IComment } from "../types/comment.js"
+import Comment from "../models/comment.js"
 import dotenv from 'dotenv';
 dotenv.config();
 

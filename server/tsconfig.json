@@ -1,14 +1,22 @@
 {
     "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "types": ["node", "multer"],
-      "outDir": "dist/js",
-      "rootDir": "src",
-      "strict": true,
+      "target": "ESNext",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "module": "ESNext",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "outDir": "dist",
+      "sourceMap": true,
       "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "skipLibCheck": true
     },
-    "include": ["src/**/*", "src/swagger.ts"],
+    "include": [
+      "src/**/*",
+      "src/swagger.ts",
+      "src/test/**/*.ts"
+    ],
     "exclude": ["src/types/*.ts", "node_modules", ".vscode"]
   }

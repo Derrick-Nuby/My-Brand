@@ -2,11 +2,12 @@ import express, { Express } from "express"
 import mongoose from "mongoose"
 import cors from "cors"
 import cookieParser from "cookie-parser"
-import userRoutes from "./routes/auth"
-import articleRoutes from "./routes/article"
-import commentRoutes from "./routes/comment"
-import likeRoutes from "./routes/like"
-import messageRoutes from "./routes/message"
+import userRoutes from "./routes/auth.js"
+import articleRoutes from "./routes/article.js"
+import commentRoutes from "./routes/comment.js"
+import likeRoutes from "./routes/like.js"
+import messageRoutes from "./routes/message.js"
+import { swaggerSetup } from './swagger';
 
 
 import dotenv from 'dotenv';
@@ -24,6 +25,7 @@ app.use('/api/article', articleRoutes)
 app.use('/api/comment', commentRoutes)
 app.use('/api/like', likeRoutes)
 app.use('/api/message', messageRoutes)
+swaggerSetup(app);
 
 
 
@@ -46,3 +48,7 @@ mongoose
   .catch(error => {
     throw error
   })
+
+
+
+export default app

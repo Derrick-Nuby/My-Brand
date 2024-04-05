@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
-import Artcile from '../models/article'
+import Artcile from '../models/article.js'
 import mongoose from 'mongoose';
 
 const commentSchema = Joi.object({

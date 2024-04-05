@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { Response, Request } from "express"
-import { IUser } from "../types/user"
-import User from "../models/user"
+import { IUser } from "../types/user.js"
+import User from "../models/user.js"
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -28,7 +28,7 @@ const createAccount = async (req: Request, res: Response): Promise<any> => {
     
     res
       .status(201)
-      .json({ message: "User Created Successfuly", user: { name, email } })
+      .json({ message: "User Created Successfully", user: { name, email } })
   } catch (error) {
     throw error
   }

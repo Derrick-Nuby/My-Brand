@@ -1,7 +1,7 @@
 import { Router } from "express"
-import { createAccount, loginUser, getAllUsers, modifyUser, deleteUser, logoutUser, getSingleUser } from "../controllers/auth"
-import { validateUserRegister, validateUserLogin, validateUserUpdate } from '../middleware/userValidation';
-import { adminAuthJWT, userAuthJWT } from '../middleware/auth';
+import { createAccount, loginUser, getAllUsers, modifyUser, deleteUser, logoutUser, getSingleUser } from "../controllers/auth.js"
+import { validateUserRegister, validateUserLogin, validateUserUpdate } from '../middleware/userValidation.js';
+import { adminAuthJWT, userAuthJWT } from '../middleware/auth.js';
 
 const router: Router = Router()
 
