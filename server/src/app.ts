@@ -7,7 +7,7 @@ import articleRoutes from "./routes/article.js"
 import commentRoutes from "./routes/comment.js"
 import likeRoutes from "./routes/like.js"
 import messageRoutes from "./routes/message.js"
-import { swaggerSetup } from './swagger';
+// import { swaggerSetup } from './swagger';
 
 
 import dotenv from 'dotenv';
@@ -25,7 +25,7 @@ app.use('/api/article', articleRoutes)
 app.use('/api/comment', commentRoutes)
 app.use('/api/like', likeRoutes)
 app.use('/api/message', messageRoutes)
-swaggerSetup(app);
+// swaggerSetup(app);
 
 
 
