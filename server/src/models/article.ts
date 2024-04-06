@@ -27,13 +27,6 @@ const articleSchema: Schema = new Schema(
     description: {
         type: String,
     },
-    comments: {
-        type: String,
-    },
-
-    likes: {
-        type: String,
-    },
 }
 );
 

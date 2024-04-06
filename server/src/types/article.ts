@@ -6,6 +6,4 @@ export interface IArticle extends Document {
     author: string
     tags: string
     description: string
-    comments: string
-    likes: string
 }

@@ -35,8 +35,6 @@ const createArticle = async (req, res) => {
             author: lUsername,
             tags: body.tags,
             description: body.description,
-            comments: body.comments,
-            likes: body.likes,
         });
         const newArticle = await article.save();
         res

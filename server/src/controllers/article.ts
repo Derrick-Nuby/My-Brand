@@ -29,42 +29,40 @@ const getAllArticles = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
-const createArticle = async (req: Request, res: Response): Promise<any> => {
-    try {
-        const body = req.body as Pick<IArticle, "title" | "tags" | "description" | "comments" | "likes">
+    const createArticle = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const body = req.body as Pick<IArticle, "title" | "tags" | "description">
 
-        const userId = req.userId;
-        const lUsername = req.lUsername;
+            const userId = req.userId;
+            const lUsername = req.lUsername;
 
-        if (!req.file) {
-            return res.status(400).json({ error: "Image file is missing" });
+            if (!req.file) {
+                return res.status(400).json({ error: "Image file is missing" });
+            }
+
+            const cloudinaryResponse = await cloudinary.v2.uploader.upload(req.file.path, { folder: 'brandImages' });
+
+
+            const article: IArticle = new Article({
+                image: cloudinaryResponse.secure_url,
+                title: body.title,
+                authorId: userId,
+                author: lUsername,
+                tags: body.tags,
+                description: body.description,
+            })
+    
+            const newArticle: IArticle = await article.save()
+    
+        res
+            .status(201)
+            .json({ message: "Article created successfully", article: newArticle})
+            // next();
+        } catch (error) {
+            console.error('Error creating article:', error);
+            res.status(500).json({ error: "Internal Server Error" });
         }
-
-        const cloudinaryResponse = await cloudinary.v2.uploader.upload(req.file.path, { folder: 'brandImages' });
-
-
-        const article: IArticle = new Article({
-            image: cloudinaryResponse.secure_url,
-            title: body.title,
-            authorId: userId,
-            author: lUsername,
-            tags: body.tags,
-            description: body.description,
-            comments: body.comments,
-            likes: body.likes,
-        })
-  
-        const newArticle: IArticle = await article.save()
-  
-      res
-        .status(201)
-        .json({ message: "Article created successfully", article: newArticle})
-        // next();
-    } catch (error) {
-        console.error('Error creating article:', error);
-        res.status(500).json({ error: "Internal Server Error" });
     }
-}
 
 const getSingleArticle = async (req: Request, res: Response): Promise<any> => {
     try {

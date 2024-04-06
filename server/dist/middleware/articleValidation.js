@@ -24,7 +24,7 @@ const articleSchema = Joi.object({
     }),
     description: Joi.string()
         .required()
-        .min(1000)
+        .min(100)
         .messages({
         'string.empty': 'descriptiton required is required',
         'string.min': 'Article description must be at least {#limit} characters long',

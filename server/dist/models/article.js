@@ -19,12 +19,6 @@ const articleSchema = new Schema({
     description: {
         type: String,
     },
-    comments: {
-        type: String,
-    },
-    likes: {
-        type: String,
-    },
 });
 export default model("Artcile", articleSchema);
 //# sourceMappingURL=article.js.map
