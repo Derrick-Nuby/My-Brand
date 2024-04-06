@@ -16,7 +16,15 @@
     "include": [
       "src/**/*",
       "src/swagger.ts",
-      "src/test/**/*.ts"
+      "src/test/**/*.ts",
+      "swaggerConfig.ts"
     ],
-    "exclude": ["src/types/*.ts", "node_modules", ".vscode"]
-  }
+    "exclude": [
+      "src/types/*.ts",
+      "node_modules",
+      ".vscode"
+    ],
+    "files": [
+      "./swaggerConfig.ts"
+    ]
+}

@@ -8,7 +8,7 @@ import commentRoutes from "./routes/comment.js";
 import likeRoutes from "./routes/like.js";
 import messageRoutes from "./routes/message.js";
 import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from './swaggerConfig.js';
+import swaggerSpec from '../swaggerConfig.js';
 import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
