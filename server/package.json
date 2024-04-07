@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "concurrently \"tsc -w\" \"nodemon dist/app.js\"",
+    "start": "concurrently \"tsc -w\" \"nodemon dist/src/app.js\"",
     "test": "npm run build && nyc mocha dist/test/*.test.js",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha"
   },

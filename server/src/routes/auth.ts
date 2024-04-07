@@ -12,7 +12,6 @@ const router: Router = Router()
  *   description: Endpoints related to user management
  */
 
-
 /**
  * @swagger
  * /api/user/create:
@@ -47,6 +46,7 @@ const router: Router = Router()
  *       '500':
  *         description: Internal server error
  */
+
 router.post("/create", validateUserRegister, createAccount)
 
 /**
@@ -124,24 +124,139 @@ router.post("/login", validateUserLogin, loginUser)
  *           type: string
  *         email:
  *           type: string
+ *         password:
+ *           type: string
  *         isAdmin:
  *           type: boolean
  */
 
 router.get("/all", adminAuthJWT, getAllUsers);
 
-router.get("/all", adminAuthJWT, getAllUsers)
-
-
+/**
+ * @swagger
+ * /api/user:
+ *   put:
+ *     summary: Update user information
+ *     description: Endpoint to update user information.
+ *     tags: [Users]
+ *     security:
+ *       - cookieAuth: [] # Use cookie authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               confirmPassword:
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description: User updated successfully
+ *       '401':
+ *         description: Unauthorized - JWT cookie not provided or invalid
+ *       '404':
+ *         description: User not found
+ *       '500':
+ *         description: Internal server error
+ */
 
 router.put("/", userAuthJWT, validateUserUpdate, modifyUser)
 
+/**
+ * @swagger
+ * /api/user:
+ *   delete:
+ *     summary: Delete logged in user
+ *     description: Endpoint to delete a logged in user account.
+ *     tags: [Users]
+ *     security:
+ *       - cookieAuth: [] # Use cookie authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password:
+ *                 type: string
+ *               confirmation:
+ *                 type: boolean
+ *     responses:
+ *       '200':
+ *         description: User deleted successfully
+ *       '400':
+ *         description: Password and confirmation are required
+ *       '401':
+ *         description: Invalid password or confirmation
+ *       '404':
+ *         description: User not found
+ *       '500':
+ *         description: Internal server error
+ */
 
 router.delete("/", userAuthJWT, deleteUser)
 
+/**
+ * @swagger
+ * /api/user/logout:
+ *   get:
+ *     summary: Logout user
+ *     description: Endpoint to logout the currently authenticated user.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: User logged out successfully
+ *         content:
+ *           application/json:    
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       '401':
+ *         description: Unauthorized - User is not authenticated
+ *       '500':
+ *         description: Internal server error
+ */
 
 router.get('/logout', userAuthJWT, logoutUser);
 
+/**
+ * @swagger
+ * /api/user/you:
+ *   get:
+ *     summary: LoggedIn User
+ *     description: Endpoint to see the currently authenticated user.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: User logged out successfully
+ *         content:
+ *           application/json:    
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       '401':
+ *         description: Unauthorized - User is not authenticated
+ *       '500':
+ *         description: Internal server error
+ */
 
 router.get('/you', userAuthJWT, getSingleUser);
 

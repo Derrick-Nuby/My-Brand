@@ -162,19 +162,19 @@ const getSingleUser = async (req: Request, res: Response): Promise<any> => {
     const user: IUser | null = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({  });
     }
 
     const { _id, name, phone, email } = user;
     
     res.status(200).json(
-      {
+      { message: "You are logged in as",
         user: {
           _id,
           name,
           phone,
           email,
-        }
+        },
       }
     );
   } catch (error) {
