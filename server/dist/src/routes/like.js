@@ -78,7 +78,75 @@ router.get("/", getAllLikes);
  *         description: Error sending email
  */
 router.post("/", userAuthJWT, createLike);
+/**
+ * @swagger
+ * /api/like/{id}:
+ *   put:
+ *     summary: Modify a like
+ *     description: Endpoint to modify a like.
+ *     tags: [Likes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the comment to retrieve
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               blogId:
+ *                 type: string
+ *               liked:
+ *                 type: boolean
+ *     responses:
+ *       '201':
+ *         description: like modified successfully
+ *       '400':
+ *         description: Bad request
+ *       '500':
+ *         description: Error sending email
+ */
 router.put("/:id", userAuthJWT, updateLike);
+/**
+ * @swagger
+ * /api/like/{id}:
+ *   delete:
+ *     summary: delete a single like by ID
+ *     description: Endpoint to delete a single like by its ID.
+ *     tags: [Likes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the message to retrieve
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 singleMessage:
+ *                   $ref: '#/components/schemas/Like'
+ *       '404':
+ *         description: Comment not found
+ *       '401':
+ *         description: Unauthorized - JWT token missing or invalid
+ *       '500':
+ *         description: Internal server error
+ */
 router.delete("/:id", userAuthJWT, deleteLike);
 export default router;
 //# sourceMappingURL=like.js.map
