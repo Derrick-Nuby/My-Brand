@@ -28,7 +28,7 @@ const router: Router = Router()
  * @swagger
  * /api/article:
  *   get:
- *     summary: Get all artilce
+ *     summary: Get all articles
  *     description: Endpoint to retrieve all articles.
  *     tags: [Articles]
  *     responses:
@@ -43,10 +43,8 @@ const router: Router = Router()
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Article'
- *       '401':
- *         description: Unauthorized - Admin authentication required
  *       '404':
- *         description: There are no currently no articles to view! Thank you for the visit :)
+ *         description: There are currently no articles to view! Thank you for the visit :)
  *       '500':
  *         description: Internal server error
  * 
@@ -126,7 +124,7 @@ router.post("/", adminAuthJWT, upload.single('image'), createArticle)
  * @swagger
  * /api/article/{id}:
  *   get:
- *     summary: Get a single artilce by ID
+ *     summary: Get a single article by ID
  *     description: Endpoint to retrieve a single article by its ID.
  *     tags: [Articles]
  *     parameters:
@@ -135,7 +133,7 @@ router.post("/", adminAuthJWT, upload.single('image'), createArticle)
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the comment to retrieve
+ *         description: ID of the article to retrieve
  *     responses:
  *       '200':
  *         description: Successful response
@@ -147,9 +145,7 @@ router.post("/", adminAuthJWT, upload.single('image'), createArticle)
  *                 singleArticle:
  *                   $ref: '#/components/schemas/Article'
  *       '404':
- *         description: Message not found
- *       '401':
- *         description: Unauthorized - JWT token missing or invalid
+ *         description: That article doesn't exist on our database
  *       '500':
  *         description: Internal server error
  */
@@ -189,9 +185,11 @@ router.get("/:id", userAuthJWT, getSingleArticle)
  *                 type: string
  *     responses:
  *       '201':
- *         description: Comment created successfully
+ *         description: Article updated successfully
  *       '400':
  *         description: Bad request
+ *       '404':
+ *         description: Article not found
  *       '500':
  *         description: Error sending email
  */
@@ -211,7 +209,7 @@ router.put("/:id", adminAuthJWT, updateArticle)
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the message to retrieve
+ *         description: ID of the article to retrieve
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -225,7 +223,7 @@ router.put("/:id", adminAuthJWT, updateArticle)
  *                 singleMessage:
  *                   $ref: '#/components/schemas/Article'
  *       '404':
- *         description: Comment not found
+ *         description: Article not found
  *       '401':
  *         description: Unauthorized - JWT token missing or invalid
  *       '500':

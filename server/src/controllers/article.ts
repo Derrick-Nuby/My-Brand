@@ -20,7 +20,7 @@ const getAllArticles = async (req: Request, res: Response): Promise<any> => {
         
 
         if(articles.length === 0 ) {
-            res.status(404).json({ message: "There are no currently no articles to view! Thank you for the visit :) "})
+            res.status(404).json({ message: "There are currently no articles to view! Thank you for the visit :) "})
         }
 
         res.status(200).json({ articles })

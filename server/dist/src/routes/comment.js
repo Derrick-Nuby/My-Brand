@@ -14,7 +14,7 @@ const router = Router();
  * /api/comment:
  *   get:
  *     summary: Get all comments
- *     description: Endpoint to retrieve all comments. Requires admin authentication.
+ *     description: Endpoint to retrieve all comments.
  *     tags: [Comments]
  *     responses:
  *       '200':
@@ -28,8 +28,8 @@ const router = Router();
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Comment'
- *       '401':
- *         description: Unauthorized - Admin authentication required
+ *       '404':
+ *         description: no comments
  *       '500':
  *         description: Internal server error
  *
@@ -57,7 +57,7 @@ router.get("/", getAllComments);
  * /api/comment:
  *   post:
  *     summary: Create a new comment
- *     description: Endpoint to create a new comment.
+ *     description: Endpoint to create a new comment. Requires to be logged in [authenticated]
  *     tags: [Comments]
  *     security:
  *       - bearerAuth: []
@@ -77,8 +77,12 @@ router.get("/", getAllComments);
  *         description: Comment created successfully
  *       '400':
  *         description: Bad request
+ *       '401':
+ *         description: Unauthorized - user authentication required
+ *       '403':
+ *         description: failed to authenticate token
  *       '500':
- *         description: Error sending email
+ *         description: internal server error
  */
 router.post("/", userAuthJWT, validateComment, createComment);
 /**
@@ -108,9 +112,11 @@ router.post("/", userAuthJWT, validateComment, createComment);
  *                 singleComment:
  *                   $ref: '#/components/schemas/Comment'
  *       '404':
- *         description: Message not found
+ *         description: comment not found
  *       '401':
- *         description: Unauthorized - JWT token missing or invalid
+ *         description: Unauthorized - user authentication required
+ *       '403':
+ *         description: failed to authenticate token
  *       '500':
  *         description: Internal server error
  */
@@ -148,7 +154,7 @@ router.get("/:id", userAuthJWT, getSingleComment);
  *       '400':
  *         description: Bad request
  *       '500':
- *         description: Error sending email
+ *         description: internal server error
  */
 router.put("/:id", userAuthJWT, validateComment, updateComment);
 /**
@@ -164,7 +170,7 @@ router.put("/:id", userAuthJWT, validateComment, updateComment);
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the message to retrieve
+ *         description: ID of the comment to retrieve
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -175,7 +181,7 @@ router.put("/:id", userAuthJWT, validateComment, updateComment);
  *             schema:
  *               type: object
  *               properties:
- *                 singleMessage:
+ *                 singleComment:
  *                   $ref: '#/components/schemas/Comment'
  *       '404':
  *         description: Comment not found

@@ -140,7 +140,7 @@ router.get("/all", adminAuthJWT, getAllUsers);
  *     description: Endpoint to update user information.
  *     tags: [Users]
  *     security:
- *       - cookieAuth: [] # Use cookie authentication
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -179,7 +179,7 @@ router.put("/", userAuthJWT, validateUserUpdate, modifyUser)
  *     description: Endpoint to delete a logged in user account.
  *     tags: [Users]
  *     security:
- *       - cookieAuth: [] # Use cookie authentication
+ *       - cookieAuth: []
  *     requestBody:
  *       required: true
  *       content:

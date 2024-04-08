@@ -23,7 +23,7 @@ const router = Router();
  *             schema:
  *               type: object
  *               properties:
- *                 comments:
+ *                 likes:
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Like'
@@ -71,11 +71,11 @@ router.get("/", getAllLikes);
  *                 type: boolean
  *     responses:
  *       '201':
- *         description: Comment created successfully
+ *         description: Like created successfully
  *       '400':
  *         description: Bad request
  *       '500':
- *         description: Error sending email
+ *         description: internal server error
  */
 router.post("/", userAuthJWT, createLike);
 /**
@@ -91,7 +91,7 @@ router.post("/", userAuthJWT, createLike);
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the comment to retrieve
+ *         description: ID of the like to retrieve
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -111,7 +111,7 @@ router.post("/", userAuthJWT, createLike);
  *       '400':
  *         description: Bad request
  *       '500':
- *         description: Error sending email
+ *         description: internal server error
  */
 router.put("/:id", userAuthJWT, updateLike);
 /**
@@ -141,7 +141,7 @@ router.put("/:id", userAuthJWT, updateLike);
  *                 singleMessage:
  *                   $ref: '#/components/schemas/Like'
  *       '404':
- *         description: Comment not found
+ *         description:  not found
  *       '401':
  *         description: Unauthorized - JWT token missing or invalid
  *       '500':
