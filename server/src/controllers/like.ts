@@ -30,7 +30,7 @@ const createLike = async (req: Request, res: Response): Promise<any> => {
             authorId: userId,
             authorName: lUsername,
             blogId: body.blogId,
-            content: body.liked,
+            liked: body.liked,
         })
 
         const newLike: ILike = await like.save()

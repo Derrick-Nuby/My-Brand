@@ -137,7 +137,6 @@ router.post("/", validateMessage, createMessage)
 
 router.get("/:id", adminAuthJWT, getSingleMessage)
 
-
 /**
  * @swagger
  * /api/message/{id}:

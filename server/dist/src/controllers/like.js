@@ -20,7 +20,7 @@ const createLike = async (req, res) => {
             authorId: userId,
             authorName: lUsername,
             blogId: body.blogId,
-            content: body.liked,
+            liked: body.liked,
         });
         const newLike = await like.save();
         res

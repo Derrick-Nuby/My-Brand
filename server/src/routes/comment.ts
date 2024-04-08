@@ -6,14 +6,196 @@ import { adminAuthJWT, userAuthJWT } from '../middleware/auth.js';
 
 const router: Router = Router()
 
+/**
+ * @swagger
+ * tags:
+ *   name: Comments
+ *   description: Endpoints related to comments
+ */
+
+/**
+ * @swagger
+ * /api/comment:
+ *   get:
+ *     summary: Get all comments
+ *     description: Endpoint to retrieve all comments. Requires admin authentication.
+ *     tags: [Comments]
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:    
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 comments:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Comment'
+ *       '401':
+ *         description: Unauthorized - Admin authentication required
+ *       '500':
+ *         description: Internal server error
+ * 
+ * components:
+ *   schemas:
+ *     Comment:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *         authorId:
+ *           type: string
+ *         authorName:
+ *           type: string
+ *         blogId:
+ *           type: string
+ *         content:
+ *           type: string
+ *         timestamp:
+ *           type: string
+ */
 
 router.get("/", getAllComments)
 
+/**
+ * @swagger
+ * /api/comment:
+ *   post:
+ *     summary: Create a new comment
+ *     description: Endpoint to create a new comment.
+ *     tags: [Comments]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               blogId:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *     responses:
+ *       '201':
+ *         description: Comment created successfully
+ *       '400':
+ *         description: Bad request
+ *       '500':
+ *         description: Error sending email
+ */
+
 router.post("/", userAuthJWT, validateComment, createComment)
+
+/**
+ * @swagger
+ * /api/comment/{id}:
+ *   get:
+ *     summary: Get a single comment by ID
+ *     description: Endpoint to retrieve a single comment by its ID.
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the comment to retrieve
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 singleComment:
+ *                   $ref: '#/components/schemas/Comment'
+ *       '404':
+ *         description: Message not found
+ *       '401':
+ *         description: Unauthorized - JWT token missing or invalid
+ *       '500':
+ *         description: Internal server error
+ */
 
 router.get("/:id", userAuthJWT, getSingleComment)
 
+/**
+ * @swagger
+ * /api/comment/{id}:
+ *   put:
+ *     summary: Modify a comment
+ *     description: Endpoint to modify a comment.
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the comment to retrieve
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               blogId:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *     responses:
+ *       '201':
+ *         description: Comment created successfully
+ *       '400':
+ *         description: Bad request
+ *       '500':
+ *         description: Error sending email
+ */
+
 router.put("/:id", userAuthJWT, validateComment, updateComment)
+
+/**
+ * @swagger
+ * /api/comment/{id}:
+ *   delete:
+ *     summary: delete a single comment by ID
+ *     description: Endpoint to delete a single comment by its ID.
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the message to retrieve
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 singleMessage:
+ *                   $ref: '#/components/schemas/Comment'
+ *       '404':
+ *         description: Comment not found
+ *       '401':
+ *         description: Unauthorized - JWT token missing or invalid
+ *       '500':
+ *         description: Internal server error
+ */
 
 router.delete("/:id", userAuthJWT, deleteComment)
 
