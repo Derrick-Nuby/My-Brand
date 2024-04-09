@@ -6,20 +6,12 @@ jobs:
       - image: cimg/node:21.7.2
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-            - v1-dependencies-
       - run:
           name: Install Dependencies
           command: cd server && npm install
       - run:
           name: Build Application
           command: cd server && npm run build
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
   test:
     docker:
       - image: cimg/node:21.7.2
@@ -27,10 +19,6 @@ jobs:
       MOCHA_TIMEOUT: 10000
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-            - v1-dependencies-
       - run:
           name: Install Dependencies
           command: cd server && npm install
