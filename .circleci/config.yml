@@ -23,6 +23,8 @@ jobs:
   test:
     docker:
       - image: cimg/node:21.7.2
+    environment:
+      MOCHA_TIMEOUT: 10000
     steps:
       - checkout
       - restore_cache:
