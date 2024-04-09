@@ -1,5 +1,9 @@
 version: 2.1
-
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
 jobs:
   build:
     docker:
@@ -15,8 +19,6 @@ jobs:
   test:
     docker:
       - image: cimg/node:21.7.2
-    environment:
-      MOCHA_TIMEOUT: 10000
     steps:
       - checkout
       - run:
