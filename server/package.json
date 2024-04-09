@@ -7,8 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "concurrently \"tsc -w\" \"nodemon dist/src/app.js\"",
-    "test": "mocha dist/src/test/*.test.js",
-    "coverage": "istanbul cover node_modules/mocha/bin/_mocha"
+    "test": "nyc mocha dist/src/test/*.test.js"
   },
   "keywords": [],
   "author": "",
