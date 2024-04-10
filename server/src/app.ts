@@ -1,6 +1,6 @@
 import express, { Express } from "express"
 import mongoose from "mongoose"
-import cors from "cors"
+import cors from "cors";
 import cookieParser from "cookie-parser"
 import userRoutes from "./routes/auth.js"
 import articleRoutes from "./routes/article.js"
@@ -9,16 +9,23 @@ import likeRoutes from "./routes/like.js"
 import messageRoutes from "./routes/message.js"
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from '../swaggerConfig.js';
+import local from './files.js';
+
 
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 const app: Express = express()
+// const cors = corsMiddleware();
 
 const PORT: string | number = process.env.PORT || 4000
 
-app.use(cors())
+app.use(local)
+app.use(cors({
+    origin: 'http://127.0.0.1:5500',
+    credentials: true // Allow credentials (cookies)
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api/user', userRoutes)
