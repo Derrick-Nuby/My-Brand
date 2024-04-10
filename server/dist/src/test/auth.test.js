@@ -44,7 +44,7 @@ describe('Authentication API Tests', () => {
                 .post('/api/user/create')
                 .send(userData);
             expect(res.status).to.equal(400);
-            expect(res.body).to.have.property('message').equal('A user with that email already exists, if that is you.. please login or reset your password');
+            expect(res.body).to.have.property('error').equal('A user with that email already exists, if that is you.. please login or reset your password');
         });
     });
     describe('User Login', () => {
@@ -89,7 +89,7 @@ describe('Authentication API Tests', () => {
                 .post('/api/user/login')
                 .send(userData);
             expect(res.status).to.equal(401);
-            expect(res.body).to.have.property('message').equal('Invalid password');
+            expect(res.body).to.have.property('error').equal('Invalid password');
         });
         it('should return an error if the user is not found', async () => {
             const userData = {
@@ -100,7 +100,7 @@ describe('Authentication API Tests', () => {
                 .post('/api/user/login')
                 .send(userData);
             expect(res.status).to.equal(404);
-            expect(res.body).to.have.property('message').equal('User not found');
+            expect(res.body).to.have.property('error').equal('User not found');
         });
     });
 });
