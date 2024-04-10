@@ -18,6 +18,8 @@ declare global {
 
 const userAuthJWT = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
+  console.log(req.cookies.jwt);
+  
 
   if (token) {
     jwt.verify(token, 'jwtSecret', (err: any, decoded: any) => {

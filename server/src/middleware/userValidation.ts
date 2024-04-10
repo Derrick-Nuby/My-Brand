@@ -77,12 +77,12 @@ const validateUserRegister = async (req: Request, res: Response, next: NextFunct
     const { error } = await userSchema.validate(req.body, { abortEarly: false });
     if (error) {
       const errorMessage = error.details.map((detail) => detail.message).join('; ');
-      return res.status(400).json({ message: errorMessage });
+      return res.status(400).json({ error: errorMessage });
     }
     next();
   } catch (err) {
     console.error('Error validating user Creation:', err);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -91,12 +91,12 @@ const validateUserLogin = async (req: Request, res: Response, next: NextFunction
       const { error } = await loginSchema.validate(req.body, { abortEarly: false });
       if (error) {
         const errorMessage = error.details.map((detail) => detail.message).join('; ');
-        return res.status(400).json({ message: errorMessage });
+        return res.status(400).json({ error: errorMessage });
       }
       next();
     } catch (err) {
       console.error('Error validating user Login:', err);
-      res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' });
     }
 };
 
@@ -105,12 +105,12 @@ const validateUserUpdate = async (req: Request, res: Response, next: NextFunctio
     const { error } = await userSchema.validate(req.body, { abortEarly: false });
     if (error) {
       const errorMessage = error.details.map((detail) => detail.message).join('; ');
-      return res.status(400).json({ message: errorMessage });
+      return res.status(400).json({ error: errorMessage });
     }
     next();
   } catch (err) {
     console.error('Error validating user Creation:', err);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
