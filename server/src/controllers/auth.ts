@@ -13,7 +13,7 @@ const createAccount = async (req: Request, res: Response): Promise<any> => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "A user with that email already exists, if that is you.. please login or reset your password" });
+      return res.status(400).json({ error: "A user with that email already exists, if that is you.. please login or reset your password" });
     }
 
     const user: IUser = new User({
@@ -41,13 +41,13 @@ const loginUser = async (req: Request, res: Response): Promise<any> => {
     const user: IUser | null = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid password" });
+      return res.status(401).json({ error: "Invalid password" });
     }
     const { id, name, email: userEmail, isAdmin } = user;
     
@@ -55,18 +55,18 @@ const loginUser = async (req: Request, res: Response): Promise<any> => {
 
     const expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
 
-    res.cookie(
-      'jwt',
-      token,
-      {httpOnly: true, path: '/', expires: expiryDate},
-      
+      res.cookie(
+        'jwt',
+        token,
+        {httpOnly: true, path: '/', expires: expiryDate},
+        
       ),
     
       res.status(200).json({ message: "User logged in successfully", user: { id, username: name, email: userEmail, isAdmin }, token });
   } catch (error) {
     // Handle any errors
     console.error("Error logging in:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -99,7 +99,7 @@ const modifyUser = async (req: Request, res: Response): Promise<any> => {
     );
 
     if (!updatedUser) {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ error: 'User not found' });
       return;
     }
 
@@ -113,7 +113,7 @@ const modifyUser = async (req: Request, res: Response): Promise<any> => {
     });
   } catch (error) {
     console.error('Error updating user:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -124,19 +124,19 @@ const deleteUser = async (req: Request, res: Response): Promise<any> => {
     const userId = req.userId;
 
     if (!password || typeof confirmation !== 'boolean') {
-      return res.status(400).json({ message: 'Password and confirmation are required' });
+      return res.status(400).json({ error: 'Password and confirmation are required' });
     }
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid || !confirmation) {
-      return res.status(401).json({ message: 'Invalid password or confirmation' });
+      return res.status(401).json({ error: 'Invalid password or confirmation' });
     }
 
     const deletedUser = await User.findOneAndDelete({ _id: userId });
@@ -147,7 +147,7 @@ const deleteUser = async (req: Request, res: Response): Promise<any> => {
     });
   } catch (error) {
     console.error('Error deleting user:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
