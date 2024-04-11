@@ -15,4 +15,4 @@ jobs:
           command: cd server && npm install
       - run:
           name: Run Tests
-          command: cd server && npm run build
+          command: cd server && npm test
