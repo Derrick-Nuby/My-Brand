@@ -106,3 +106,25 @@ function showError(message, color, duration = 5000) {
         errorElement.style.display = "none";
     }, duration);
 }
+
+function showMessage(message, color, duration = 5000) {
+    const msgbox = document.getElementById('msgbox');
+    const messageParagraph = msgbox.querySelector('p');
+    
+    msgbox.style.display = 'block';
+    msgbox.style.right = '-100%';
+    msgbox.style.animation = 'none';
+    msgbox.style.backgroundColor = 'rgb(145, 0, 0)';
+
+    messageParagraph.textContent = message;
+    msgbox.style.backgroundColor = color;
+
+    msgbox.offsetHeight;
+    msgbox.style.animation = 'slideInFromRight 1s ease-in-out forwards';
+
+    setTimeout(function() {
+        msgbox.style.display = 'block';
+        msgbox.style.animation = 'slideOutToRight 3s ease-in-out 0s forwards';
+    }, duration);
+        
+}
