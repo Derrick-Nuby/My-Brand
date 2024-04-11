@@ -1,18 +1,34 @@
 version: 2.1
 
-workflows:
-  test-endpoints:
-    jobs:
-      - test
 jobs:
-  test:
+  build:
     docker:
-      - image: cimg/node:21.7.1
+      - image: cimg/node:21.7.2
     steps:
       - checkout
       - run:
-          name: Install dependencies
+          name: Install Dependencies
+          command: cd server && npm install
+      - run:
+          name: Build Application
+          command: cd server && npm run build
+  test:
+    docker:
+      - image: cimg/node:21.7.2
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
           command: cd server && npm install
       - run:
           name: Run Tests
           command: cd server && npm test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
