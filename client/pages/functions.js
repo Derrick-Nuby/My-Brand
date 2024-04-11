@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:4000';
 
-document.getElementById('userLoginForm').addEventListener('submit', userLogin);
+// document.getElementById('userLoginForm').addEventListener('submit', userLogin);
 
 function userLogin(event) {
     event.preventDefault();

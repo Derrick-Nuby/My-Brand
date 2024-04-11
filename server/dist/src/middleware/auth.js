@@ -4,7 +4,7 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET || 'defaultSecret';
 const userAuthJWT = (req, res, next) => {
     const token = req.cookies.jwt;
-    console.log(req.cookies.jwt);
+    // console.log(req.cookies.jwt);
     if (token) {
         jwt.verify(token, 'jwtSecret', (err, decoded) => {
             if (err) {
