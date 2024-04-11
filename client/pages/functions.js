@@ -75,8 +75,8 @@ function userCreation(event) {
 
 function userLogout(event){
     event.preventDefault();
-    // alert('button clicked');
 
+    localStorage.removeItem('jwtToken');
     fetch(`${API_URL}/api/user/logout`, {
         method: 'GET',
         credentials: 'include'
