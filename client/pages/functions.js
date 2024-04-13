@@ -31,7 +31,7 @@ function userLogin(event) {
 
             showError(data.message, '#10E956', 3000)
             setTimeout(function() {
-                // window.location.href = './articles.html';
+                window.location.href = './articles.html';
             }, 3000);
         }
     })
@@ -84,16 +84,14 @@ function userLogout(event){
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            // showError(data.error);
             console.log(data.error);
         } else {
-            // showError(data.message, '#10E956', 3000);
-            console.log(data.message);
+            showError(data.message, '10E956', 3000)
         }
     })
     .catch(error => {
-        // showError(error.message);
-        console.error(error);
+        showError(error.message);
+        // console.error(error);
     });
 }
 

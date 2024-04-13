@@ -343,6 +343,16 @@ input[type=submit]:hover {
     margin: 20px 100px;
     font-size: 20px;
 }
+/* articles */
+
+.reactions i {
+    font-size: 90px;
+    cursor: pointer;
+}
+
+.liked {
+    color: var(--scolor);
+}
 
 /* comments */
 
