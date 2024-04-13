@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { getAllComments, createComment, getSingleComment, updateComment, deleteComment } from '../controllers/comment.js'
+import { getAllComments, createComment, getSingleComment, updateComment, deleteComment, getPostsComment } from '../controllers/comment.js'
 import { validateComment } from '../middleware/commentValidation.js';
 import { adminAuthJWT, userAuthJWT } from '../middleware/auth.js';
 
@@ -130,6 +130,9 @@ router.post("/", userAuthJWT, validateComment, createComment)
  */
 
 router.get("/:id", userAuthJWT, getSingleComment)
+
+
+router.get("/article/:id", userAuthJWT, getPostsComment)
 
 /**
  * @swagger
