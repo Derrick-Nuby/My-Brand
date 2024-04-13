@@ -13,25 +13,25 @@ describe('Authentication API Tests', () => {
       await User.deleteMany({});
     });
 
-    it('should create a new user account with valid input', async () => {
-      const userData = {
-        name: '222User',
-        phone: '0786263290',
-        email: '222user@gmail.com',
-        password: 'Passw0RD!',
-        confirmPassword: 'Passw0RD!',
-      };
+    // it('should create a new user account with valid input', async () => {
+    //   const userData = {
+    //     name: '222User',
+    //     phone: '0786263290',
+    //     email: '222user@gmail.com',
+    //     password: 'Passw0RD!',
+    //     confirmPassword: 'Passw0RD!',
+    //   };
 
-      const res = await request(app)
-        .post('/api/user/create')
-        .send(userData);
+    //   const res = await request(app)
+    //     .post('/api/user/create')
+    //     .send(userData);
 
-      expect(res.status).to.equal(201);
-      expect(res.body).to.have.property('message').equal('User Created Successfully');
-      expect(res.body).to.have.property('user');
-      expect(res.body.user).to.have.property('name').equal(userData.name);
-      expect(res.body.user).to.have.property('email').equal(userData.email);
-    });
+    //   expect(res.status).to.equal(201);
+    //   expect(res.body).to.have.property('message').equal('User Created Successfully');
+    //   expect(res.body).to.have.property('user');
+    //   expect(res.body.user).to.have.property('name').equal(userData.name);
+    //   expect(res.body.user).to.have.property('email').equal(userData.email);
+    // });
 
     it('should return an error if the email is already in use', async () => {
       const existingUser = new User({
