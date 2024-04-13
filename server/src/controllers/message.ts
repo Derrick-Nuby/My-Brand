@@ -59,13 +59,13 @@ const createMessage = async (req: Request, res: Response): Promise<any> => {
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error('Error sending email:', error);
-                res.status(500).json({ error: "Error sending email" });
+                return res.status(500).json({ error: "Error sending email" });
             }
         });
 
 
 
-        res
+        return res
         .status(201)
         .json({ message: "Message created successfully", Message: newMessage})
 
