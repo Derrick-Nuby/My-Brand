@@ -11,10 +11,10 @@ const getAllComments = async (req: Request, res: Response): Promise<any> => {
         
 
         if(comments.length === 0 ) {
-            res.status(404).json({ message: "There are no currently no comments to view! Thank you for the visit :) "})
+            return res.status(404).json({ message: "There are no currently no comments to view! Thank you for the visit :) "})
         }
 
-        res.status(200).json({ comments })
+        return res.status(200).json({ comments })
     } catch (error) {
     throw error
     }
@@ -62,6 +62,23 @@ const getSingleComment = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const getPostsComment = async (req: Request, res: Response): Promise<any> => {
+    try {
+
+        const blogId = req.params.id;
+        const comments: IComment[] = await Comment.find({ blogId: blogId });
+
+        if(comments.length === 0 ) {
+            return res.status(404).json({ message: "There are no currently no comments to view! Thank you for the visit :) "})
+        }
+
+        return res.status(200).json({ comments })
+
+    } catch (error) {
+    throw error
+    }
+}
+
 const updateComment = async (req: Request, res: Response): Promise<any> => {
     try {
 
@@ -101,4 +118,4 @@ const deleteComment = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
-export { getAllComments, createComment, getSingleComment, updateComment, deleteComment }
+export { getAllComments, createComment, getSingleComment, updateComment, deleteComment, getPostsComment }
