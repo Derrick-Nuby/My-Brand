@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getAllArticles, createArticle, getSingleArticle, updateArticle, deleteArticle } from '../controllers/article.js';
-import { adminAuthJWT, userAuthJWT } from '../middleware/auth.js';
+import { adminAuthJWT } from '../middleware/auth.js';
 import multer from 'multer';
 const storage = multer.diskStorage({
     destination: 'uploads/',
@@ -137,7 +137,7 @@ router.post("/", adminAuthJWT, upload.single('image'), createArticle);
  *       '500':
  *         description: Internal server error
  */
-router.get("/:id", userAuthJWT, getSingleArticle);
+router.get("/:id", getSingleArticle);
 /**
  * @swagger
  * /api/article/{id}:
