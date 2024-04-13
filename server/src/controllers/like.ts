@@ -64,12 +64,28 @@ const updateLike = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const likeCounter = async (req: Request, res: Response) => {
+    try {
+
+        const blogId = req.params.id;
+
+        const likeCount = await Like.countDocuments({ blogId, liked: true });
+        res.status(200).json({ likeCount });
+    
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while counting likes' });
+    }
+};
+
+
 const deleteLike = async (req: Request, res: Response): Promise<any> => {
     try {
 
-        const likeID = req.params.id;
+        const blogId = req.params.id;
+        const authorId = req.userId;
 
-        const deletedLike: ILike | null = await Like.findOneAndDelete( { _id: likeID });
+
+        const deletedLike: ILike | null = await Like.findOneAndDelete( { blogId, authorId });
 
         if (!deletedLike) {
             res.status(404).json({ message: "That like doesn't exist in our database" });
@@ -83,4 +99,4 @@ const deleteLike = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
-export { getAllLikes, createLike, updateLike, deleteLike }
+export { getAllLikes, createLike, updateLike, deleteLike, likeCounter }
