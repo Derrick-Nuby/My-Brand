@@ -18,7 +18,7 @@ const userAuthJWT = (req, res, next) => {
         });
     }
     else {
-        res.status(401).json({ message: 'You need to login to access this resource; Please login or create an account' });
+        res.status(401).json({ error: 'You need to login to access this resource; Please login or create an account' });
     }
 };
 const adminAuthJWT = (req, res, next) => {
@@ -39,7 +39,7 @@ const adminAuthJWT = (req, res, next) => {
         });
     }
     else {
-        res.status(401).json({ message: 'You need to login to access this resource; Please login or create an account' });
+        res.status(401).json({ error: 'You need to login to access this resource; Please login or create an account' });
     }
 };
 export { userAuthJWT, adminAuthJWT };

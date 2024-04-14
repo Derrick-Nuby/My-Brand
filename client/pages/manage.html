@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
     <link rel="manifest" href="../images/favicon/site.webmanifest">
-    <title>LogIn To Your Account</title>
+    <title>Create Your Account | Derrick NUBY</title>
     <link rel="stylesheet" href="./pages.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <a href="../index.html">Home</a>
             <a href="./about.html">About Me</a>
             <a href="./articles.html">Articles</a>
-            <a href="./contact.html">Contact</a>
+            <a href="./contact.html" >Contact</a>
             <a href="./login.html" id="active">Account</a>
 
         </div>
@@ -28,11 +28,15 @@
         </div>
     </header>
 
+    <div id="msgbox">
+        <p>There was an Error :( <br>Please contact the site admnistrators</p>
+    </div>
+
     <main>
         <div class="contactme">
             <div class="midtitle">
                 <p class="midline"></p>
-                <h2 class="code smidtitle">Login</h2>
+                <h2 class="code smidtitle">Create Account</h2>
                 <p class="midline"></p>
             </div>
             <center>
@@ -42,19 +46,24 @@
             </center>
             <div class="contactitems">
                 <div class="righcontact">
-                    
-                    <form action="" class="formcontact" id="userLoginForm">
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" id="loginEmail">
+                    <form action="" class="formcontact" id="userShowAndUpdateForm">
+                        <label for="names">Names</label>
+                        <input type="text" name="names" id="names">
+                        <label for="email">Email: </label>
+                        <input type="email" name="email" id="email" readonly>
+                        <label for="phone">Phone: </label>
+                        <input type="text" name="phone" id="phone">
                         <label for="password">Password:</label>
-                        <input type="password" name="password" id="loginPassword">
+                        <input type="password" name="password" id="password">
+                        <label for="password">Confirm Password:</label>
+                        <input type="password" name="password" id="passwordval">
+
+                        <p>if you have updated your details please click update</p>
+
                         <center>
-                            <input type="submit" value="Login" onclick="userLogin(event)">
+                            <input type="submit" value="Update" onclick="userUpdate(event)">
                         </center>
-                        
                     </form>
-                    <p>if you do not have an account; Please <a href="./create.html" class="link">create an account</a></p>
-                    <!-- <button >hello</button> -->
                 </div>
             </div>
         </div>
@@ -64,11 +73,11 @@
         <a href="../index.html">Home</a>
         <a href="./articles.html">Articles</a>
         <a href="./contact.html">contact</a>
-        <a href="./manage.html">manage</a>
-        <a href="" onclick="userLogout(event)">Logout</a>
+        <a href="./login.html">Account</a>
     </footer>
 <!-- <script src="./pages.js"></script> -->
-<script src="./functions.js"></script>
+
+<script src="./manage.js"></script>
 
 </body>
 </html>
