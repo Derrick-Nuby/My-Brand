@@ -22,7 +22,7 @@ function userLogin(event) {
         if (data.error) {
             showError(data.error);
         } else {
-            
+        if ( data.user.isAdmin === false) {
             const { token } = data;
             const expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
             document.cookie = `jwt=${token}; Path=/; Expires=${expiryDate};`;
@@ -33,6 +33,18 @@ function userLogin(event) {
             setTimeout(function() {
                 window.location.href = './articles.html';
             }, 3000);
+        } else {
+            const { token } = data;
+            const expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+            document.cookie = `jwt=${token}; Path=/; Expires=${expiryDate};`;
+
+            localStorage.setItem('jwtToken', token);
+
+            showError(data.message, '#10E956', 3000)
+            setTimeout(function() {
+                window.location.href = '../admin/index.html';
+            }, 3000);
+        }
         }
     })
     .catch(error => {
@@ -84,7 +96,7 @@ function userLogout(event){
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            console.log(data.error);
+            showError(data.error)
         } else {
             showError(data.message, '10E956', 3000)
         }
