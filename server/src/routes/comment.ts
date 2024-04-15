@@ -132,7 +132,7 @@ router.post("/", userAuthJWT, validateComment, createComment)
 router.get("/:id", userAuthJWT, getSingleComment)
 
 
-router.get("/article/:id", userAuthJWT, getPostsComment)
+router.get("/article/:id", getPostsComment)
 
 /**
  * @swagger

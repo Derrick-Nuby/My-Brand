@@ -182,10 +182,14 @@ function toggleLike(event) {
         })
         .then(response => response.json())
         .then(data => {
-            
-            showMessage(data.message, '#10E956', 3000);
+            if (data.error) {
+                showMessage(data.error)
+            } else {
+                showMessage(data.message, '#10E956', 3000);
             likeIcon.classList.add('liked');
             fetchLikesByPost()
+            }
+            
             })
         .catch(error => {
             console.error(error);

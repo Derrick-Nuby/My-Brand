@@ -121,7 +121,7 @@ router.post("/", userAuthJWT, validateComment, createComment);
  *         description: Internal server error
  */
 router.get("/:id", userAuthJWT, getSingleComment);
-router.get("/article/:id", userAuthJWT, getPostsComment);
+router.get("/article/:id", getPostsComment);
 /**
  * @swagger
  * /api/comment/{id}:
