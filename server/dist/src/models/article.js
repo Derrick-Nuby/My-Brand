@@ -19,6 +19,10 @@ const articleSchema = new Schema({
     description: {
         type: String,
     },
+    timestamp: {
+        type: Date,
+        default: Date.now,
+    },
 });
 export default model("Artcile", articleSchema);
 //# sourceMappingURL=article.js.map

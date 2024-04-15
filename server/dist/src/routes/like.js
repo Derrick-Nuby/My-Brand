@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllLikes, createLike, updateLike, deleteLike } from '../controllers/like.js';
+import { getAllLikes, createLike, updateLike, deleteLike, likeCounter } from '../controllers/like.js';
 import { userAuthJWT } from '../middleware/auth.js';
 const router = Router();
 /**
@@ -49,6 +49,7 @@ const router = Router();
  *           type: boolean
  */
 router.get("/", getAllLikes);
+router.get("/count/:id", likeCounter);
 /**
  * @swagger
  * /api/like:

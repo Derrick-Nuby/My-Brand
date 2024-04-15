@@ -11,7 +11,7 @@ const messageSchema = Joi.object({
         .required()
         .email()
         .messages({
-        'string.empty': 'Please input your names',
+        'string.empty': 'Please input your email',
         'string.email': 'the email format is wrong',
     }),
     subject: Joi.string()
@@ -32,7 +32,7 @@ const messageSchema = Joi.object({
         .required()
         .min(50)
         .messages({
-        'string.empty': 'Please input your message',
+        'string.empty': 'Please input your message details',
         'string.min': 'Your message body must be at least {#limit} characters long',
     }),
 });
@@ -41,13 +41,13 @@ const validateMessage = async (req, res, next) => {
         const { error } = await messageSchema.validate(req.body, { abortEarly: false });
         if (error) {
             const errorMessage = error.details.map((detail) => detail.message).join('; ');
-            return res.status(400).json({ message: errorMessage });
+            return res.status(400).json({ error: errorMessage });
         }
         next();
     }
     catch (err) {
         console.error('Error validating message Creation:', err);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 export { validateMessage };

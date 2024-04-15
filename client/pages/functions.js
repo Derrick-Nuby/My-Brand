@@ -1,12 +1,14 @@
-document.getElementById('userLoginForm').addEventListener('submit', userLogin);
+const API_URL = 'http://localhost:4000';
+
+// document.getElementById('userLoginForm').addEventListener('submit', userLogin);
 
 function userLogin(event) {
     event.preventDefault();
-
+    
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
 
-    fetch('http://localhost:4000/api/user/login', {
+    fetch(`${API_URL}/api/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -14,21 +16,41 @@ function userLogin(event) {
         body: JSON.stringify({ email, password })
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to login');
-        }
-        return response.json();
+    return response.json()
     })
     .then(data => {
-        console.log('Login successful:', data);
-        // window.location.href = '../index.html';
+        if (data.error) {
+            showError(data.error);
+        } else {
+        if ( data.user.isAdmin === false) {
+            const { token } = data;
+            const expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+            document.cookie = `jwt=${token}; Path=/; Expires=${expiryDate};`;
+
+            localStorage.setItem('jwtToken', token);
+
+            showError(data.message, '#10E956', 3000)
+            setTimeout(function() {
+                window.location.href = './articles.html';
+            }, 3000);
+        } else {
+            const { token } = data;
+            const expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+            document.cookie = `jwt=${token}; Path=/; Expires=${expiryDate};`;
+
+            localStorage.setItem('jwtToken', token);
+
+            showError(data.message, '#10E956', 3000)
+            setTimeout(function() {
+                window.location.href = '../admin/index.html';
+            }, 3000);
+        }
+        }
     })
     .catch(error => {
-        showError(error.message)
+        showError(error.message);
     });
 }
-
-// document.getElementById('userCreationForm').addEventListener('submit', userCreation);
 
 function userCreation(event) {
     event.preventDefault();
@@ -39,29 +61,23 @@ function userCreation(event) {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('passwordval').value;
 
-    // if (password !== passwordval) {
-    //     showError("Passwords do not match");
-    //     return;
-    // }
-
-    fetch('http://localhost:4000/api/user/create', {
+    fetch(`${API_URL}/api/user/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
+        
         body: JSON.stringify({ name, email, phone, password, confirmPassword })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to create account');
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
-        // console.log('Account created successfully:', data);
-        // window.location.href = './login.html';
         if (data.error) {
-            throw new Error(data.error);
+            showError(data.error);
+        } else {
+            showError(data.message, '#10E956', 3000);
+            setTimeout(function() {
+                window.location.href = './login.html';
+            }, 3000);
         }
     })
     .catch(error => {
@@ -69,21 +85,56 @@ function userCreation(event) {
     });
 }
 
-function showError(message, duration = 4000) {
+function userLogout(event){
+    event.preventDefault();
+
+    localStorage.removeItem('jwtToken');
+    fetch(`${API_URL}/api/user/logout`, {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            showError(data.error)
+        } else {
+            showError(data.message, '10E956', 3000)
+        }
+    })
+    .catch(error => {
+        showError(error.message);
+        // console.error(error);
+    });
+}
+
+function showError(message, color, duration = 5000) {
     const errorParagraph = errorElement.querySelector("p");
     errorParagraph.textContent = message;
     errorElement.style.display = "block";
+    errorElement.style.borderColor = color;
     setTimeout(function() {
         errorElement.style.display = "none";
     }, duration);
 }
 
+function showMessage(message, color, duration = 5000) {
+    const msgbox = document.getElementById('msgbox');
+    const messageParagraph = msgbox.querySelector('p');
+    
+    msgbox.style.display = 'block';
+    msgbox.style.right = '-100%';
+    msgbox.style.animation = 'none';
+    msgbox.style.backgroundColor = 'rgb(145, 0, 0)';
 
-function showError(message, duration = 4000) {
-    var errorParagraph = errorElement.querySelector("p");
-    errorParagraph.textContent = message;
-    errorElement.style.display = "block";
+    messageParagraph.textContent = message;
+    msgbox.style.backgroundColor = color;
+
+    msgbox.offsetHeight;
+    msgbox.style.animation = 'slideInFromRight 1s ease-in-out forwards';
+
     setTimeout(function() {
-        errorElement.style.display = "none";
+        msgbox.style.display = 'block';
+        msgbox.style.animation = 'slideOutToRight 3s ease-in-out 0s forwards';
     }, duration);
+        
 }

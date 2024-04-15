@@ -18,6 +18,8 @@ declare global {
 
 const userAuthJWT = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
+  // console.log(req.cookies.jwt);
+  
 
   if (token) {
     jwt.verify(token, 'jwtSecret', (err: any, decoded: any) => {
@@ -31,7 +33,7 @@ const userAuthJWT = (req: Request, res: Response, next: NextFunction) => {
       next();
     });
   } else {
-    res.status(401).json({ message: 'You need to login to access this resource; Please login or create an account' });
+    res.status(401).json({ error: 'You need to login to access this resource; Please login or create an account' });
   }
 };
 
@@ -54,7 +56,7 @@ const adminAuthJWT = (req: Request, res: Response, next: NextFunction) => {
       next();
     });
   } else {
-    res.status(401).json({ message: 'You need to login to access this resource; Please login or create an account' });
+    res.status(401).json({ error: 'You need to login to access this resource; Please login or create an account' });
   }
 };
 

@@ -150,7 +150,7 @@ router.post("/", adminAuthJWT, upload.single('image'), createArticle)
  *         description: Internal server error
  */
 
-router.get("/:id", userAuthJWT, getSingleArticle)
+router.get("/:id", getSingleArticle)
 
 /**
  * @swagger

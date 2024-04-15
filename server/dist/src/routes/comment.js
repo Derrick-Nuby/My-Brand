@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllComments, createComment, getSingleComment, updateComment, deleteComment } from '../controllers/comment.js';
+import { getAllComments, createComment, getSingleComment, updateComment, deleteComment, getPostsComment } from '../controllers/comment.js';
 import { validateComment } from '../middleware/commentValidation.js';
 import { userAuthJWT } from '../middleware/auth.js';
 const router = Router();
@@ -121,6 +121,7 @@ router.post("/", userAuthJWT, validateComment, createComment);
  *         description: Internal server error
  */
 router.get("/:id", userAuthJWT, getSingleComment);
+router.get("/article/:id", getPostsComment);
 /**
  * @swagger
  * /api/comment/{id}:

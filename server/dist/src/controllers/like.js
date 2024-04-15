@@ -46,10 +46,21 @@ const updateLike = async (req, res) => {
         throw error;
     }
 };
+const likeCounter = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+        const likeCount = await Like.countDocuments({ blogId, liked: true });
+        res.status(200).json({ likeCount });
+    }
+    catch (error) {
+        res.status(500).json({ error: 'An error occurred while counting likes' });
+    }
+};
 const deleteLike = async (req, res) => {
     try {
-        const likeID = req.params.id;
-        const deletedLike = await Like.findOneAndDelete({ _id: likeID });
+        const blogId = req.params.id;
+        const authorId = req.userId;
+        const deletedLike = await Like.findOneAndDelete({ blogId, authorId });
         if (!deletedLike) {
             res.status(404).json({ message: "That like doesn't exist in our database" });
             return;
@@ -60,5 +71,5 @@ const deleteLike = async (req, res) => {
         throw error;
     }
 };
-export { getAllLikes, createLike, updateLike, deleteLike };
+export { getAllLikes, createLike, updateLike, deleteLike, likeCounter };
 //# sourceMappingURL=like.js.map

@@ -27,6 +27,10 @@
         </div>
     </header>
 
+    <div id="msgbox">
+        <p>There was an Error :( <br>Please contact the site admnistrators</p>
+    </div>
+
     <main>
         <div class="herosection">
             <div class="lefthero">
@@ -172,16 +176,18 @@
                     <p class="code">Kindly Contact me throught The Below Form.</p>
                 </div>
                 <div class="righcontact">
-                    <form action="" class="formcontact">
+                    <form class="formcontact" id="contactform">
                         <label for="names">Names:</label>
                         <input type="text" name="names" id="names">
                         <label for="email">Email:</label>
                         <input type="email" name="email" id="email">
                         <label for="title">Message Title:</label>
-                        <input type="text" name="title" id="ftitle">
+                        <input type="text" name="title" id="ctitle">
+                        <label for="phone">Phone:</label>
+                        <input type="phone" name="phone" id="phone">
                         <label for="message">Message:</label>
                         <textarea name="message" id="message" cols="30" rows="10"></textarea>
-
+    
                         <input type="submit" value="Submit">
                     </form>
                 </div>
@@ -201,4 +207,5 @@
     </footer>
 
 </body>
+<script src="./pages/message.js"></script>
 </html>
