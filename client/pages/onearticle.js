@@ -6,7 +6,7 @@ function fetchAndPopulateBlogPost() {
     const postId = urlParams.get('id');
 
     if (postId) {
-        fetch(`http://localhost:4000/api/article/${postId}`)
+        fetch(`${API_URL}/api/article/${postId}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -55,7 +55,7 @@ function updateBlogPostHtml(blogPost) {
     document.title = blogPost.title;
 }
 
-document.getElementById('formComment').addEventListener('submit', createComment);
+document.getElementById('formComment').addEventListener('submit', updateComment);
 
 function createComment(event) {
     event.preventDefault();
@@ -123,23 +123,42 @@ function populateComments(comments) {
     comments.forEach(comment => {
         const commentElement = document.createElement('div');
         commentElement.classList.add('comment');
-        
+    
         const commentHeader = document.createElement('div');
         commentHeader.classList.add('cmnthd', 'code', 'scolor');
-        
+    
         const timestamp = new Date(comment.timestamp);
         const formattedDate = timestamp.toDateString();
-
-        commentHeader.textContent = `${comment.authorName} ${formattedDate}`;
+    
+        const headerP = document.createElement('p');
+        headerP.textContent = `${comment.authorName} ${formattedDate}`;
         
+        commentHeader.appendChild(headerP); 
+    
+        const optionsP = document.createElement('p');
+    
+        const editSpan = document.createElement('span');
+        editSpan.id = 'editComment';
+        editSpan.textContent = 'Edit';
+        editSpan.setAttribute('data-id', comment._id);
+        optionsP.appendChild(editSpan);
+    
+        const deleteSpan = document.createElement('span');
+        deleteSpan.id = 'deleteComment';
+        deleteSpan.textContent = 'Delete';
+        deleteSpan.setAttribute('data-id', comment._id);
+        optionsP.appendChild(deleteSpan);
+    
+        commentHeader.appendChild(optionsP);
+        commentElement.appendChild(commentHeader);
+    
         const commentContent = document.createElement('p');
         commentContent.textContent = comment.content;
-        
-        commentElement.appendChild(commentHeader);
+
         commentElement.appendChild(commentContent);
-        
         commentsContainer.appendChild(commentElement);
     });
+    
 }
 
 document.querySelector('.reactions i.fa-thumbs-up').addEventListener('click', toggleLike);
@@ -221,7 +240,105 @@ function fetchLikesByPost() {
     }
 }
 
+const commentsContainer = document.querySelector('#realcomments');
 
+commentsContainer.addEventListener('click', function(event) {
+
+    if (event.target && event.target.id === 'deleteComment') {
+        deleteComment(event);
+    } else if (event.target && event.target.id === 'editComment') {
+        fillCommentForm(event);
+    }
+});
+
+
+
+function deleteComment(event) {
+    event.preventDefault();
+
+    const deleteButton = event.target;
+    const commentElement = deleteButton.closest('.comment');
+    const commentId = deleteButton.getAttribute('data-id');
+
+fetch(`${API_URL}/api/comment/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+.then(response => response.json())
+.then(data => {
+    if (data.error) {
+        showMessage(data.error)
+    } else {
+        commentElement.remove();
+        showMessage(data.message, '#10E956')
+    }
+})
+.catch(error => {
+    showMessage(error.message || error)
+
+})
+
+}
+
+function fillCommentForm(event) {
+
+    const editButton = event.target;
+    const commentElement = editButton.closest('.comment');
+    const commentId = editButton.getAttribute('data-id');
+
+    const commentContent = commentElement.querySelector(':not(.cmnthd) > p').textContent;
+
+
+    const commentForm = document.getElementById('formComment');
+    const contentInput = commentForm.querySelector('#comment');
+    
+    if(contentInput) {
+        contentInput.value = commentContent;
+    }
+
+    commentForm.querySelector('#commentId').value = commentId;
+}
+
+function updateComment(event) {
+    event.preventDefault(); 
+
+    const form = event.target;
+    // const commentId = form.getAttribute('data-comment-id');
+    const content = form.querySelector('#comment').value;
+
+    const commentId = form.querySelector('#commentId').value;
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = urlParams.get('id');
+
+if (commentId) {
+
+fetch(`${API_URL}/api/comment/${commentId}`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ blogId, content }),
+})
+.then(response => response.json())
+.then(data => {
+    if (data.error) {
+        showMessage(data.error)
+    } else {
+        showMessage(data.message, '#10E956')
+        fetchCommentsByPost()
+        form.reset();
+    }
+})
+.catch(error => {
+    // Handle network or other errors
+    console.error('Error updating comment:', error);
+}); } else {
+    createComment(event)
+}
+}
 
 
 

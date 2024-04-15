@@ -2,7 +2,7 @@ const API_URL = 'http://localhost:4000';
 
 // Function to fetch and populate articles on page load
 function fetchAndPopulateArticles() {
-    fetch('http://localhost:4000/api/article/')
+    fetch(`${API_URL}/api/article/`)
         .then(response => response.json())
         .then(data => {
 

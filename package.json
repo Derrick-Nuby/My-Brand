@@ -1,11 +1,14 @@
 {
-  "dependencies": {
-    "nodemailer": "^6.9.13"
+  "name": "my-brand",
+  "version": "1.0.0",
+  "description": "> ![GitHub language count](https://img.shields.io/github/languages/count/Derrick-Nuby/My-Brand) ![GitHub top language](https://img.shields.io/github/languages/top/Derrick-Nuby/My-Brand) ![Website](https://img.shields.io/website?up_message=active&url=https%3A%2F%2Fderrick-nuby.github.io%2FMy-Brand%2F) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Derrick-Nuby/My-Brand) ![GitHub last commit](https://img.shields.io/github/last-commit/Derrick-Nuby/My-Brand) ![Twitter Follow](https://img.shields.io/twitter/follow/derricknuby?style=social) ![GitHub Repo stars](https://img.shields.io/github/stars/Derrick-Nuby/My-Brand?style=social)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "@types/chai": "^4.3.14",
-    "@types/mocha": "^10.0.6",
-    "chai": "^5.1.0",
-    "mocha": "^10.4.0"
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }

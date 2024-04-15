@@ -377,7 +377,15 @@ input[type=submit]:hover {
     margin: 0px 100px;
 }
 
+.cmnthd {
+    display: flex;
+    justify-content: space-between;
+}
 
+.cmnthd span:hover {
+    cursor: pointer;
+    color: var(--fcolor);
+}
 
 
 
@@ -500,6 +508,9 @@ footer > a {
         .boxerro {
             width: 90%;
         }
+        .cmnthd {
+            flex-direction: row;
+        }
     }
 }
 
@@ -580,6 +591,9 @@ footer > a {
         }
         .boxerro {
             width: 90%;
+        }
+        .cmnthd {
+            flex-direction: row;
         }
     }
 }
