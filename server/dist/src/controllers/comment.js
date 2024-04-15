@@ -84,12 +84,14 @@ const deleteComment = async (req, res) => {
     try {
         const CommentId = req.params.id;
         const userId = req.userId;
+        const isAdmin = req.isAdmin;
         const comment = await Comment.findById(CommentId);
+        console.log(isAdmin);
         if (!comment) {
             res.status(404).json({ error: "That Comment doesn't exist in our database" });
             return;
         }
-        if (comment.authorId.toString() !== userId) {
+        if (comment.authorId.toString() !== userId || isAdmin != true) {
             res.status(403).json({ error: "You do not own that comment and therefore cannot delete it." });
             return;
         }
