@@ -6,6 +6,8 @@
     <script src="https://kit.fontawesome.com/9e43b5fe15.js" crossorigin="anonymous"></script>
     <title>Derrick NUBY | SoftWare Enginner</title>
     <link rel="stylesheet" href="./admin.css">
+    <link rel="stylesheet" href="../pages/pages.css">
+
 </head>
 <body>
     
@@ -16,7 +18,7 @@
             <a href="./adblogs.html" >Blog Manager</a>
             <a href="./querries.html" >Querry Manager</a>
             <a href="./users.html">Users</a>
-            <a href="../index.html">Log-Out</a>
+            <a href="../index.html" onclick="userLogout(event)">Log-Out</a>
 
         </div>
         <div class="bars">
@@ -27,6 +29,11 @@
     <main>
         <h2 class="code smidtitle">Welcome Admin Derrick</h2>
         
+        <center>
+            <div class="boxerro" id="errorElement">
+                <p>Error</p>
+            </div>
+        </center>
 
         <div class="admessages">
             <div class="midtitle">
@@ -55,4 +62,5 @@
     </footer>
 
 </body>
+<script src="../pages/functions.js"></script>
 </html>
