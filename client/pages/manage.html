@@ -67,6 +67,32 @@
                 </div>
             </div>
         </div>
+
+        <div class="delete">
+            <div class="midtitle">
+                <p class="midline red"></p>
+                <h2 class="code smidtitle red">Delete Account</h2>
+                <p class="midline red"></p>
+            </div>
+            <div class="contactitems">
+                <div class="righcontact">
+                    <form action="" class="formcontact" id="userDeleteForm">
+                        <label for="confirmation">Do you want to delet you account??</label>
+                            <input type="radio" name="confirmation" id="yes" value="yes">
+                            <label for="yes">Yes</label>
+                            <input type="radio" name="confirmation" id="no" value="no">
+                            <label for="no">No</label>
+                        <label for="password">Password:</label>
+                        <input type="password" name="delPassword" id="delPassword">
+                        <p class="red">are you sure you want to delete your account?? there is no going back from this action</p>
+
+                        <center>
+                            <input class="red" type="submit" value="Delete" onclick="userDelete(event)">
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>

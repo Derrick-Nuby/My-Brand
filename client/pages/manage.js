@@ -1,5 +1,6 @@
 const API_URL = 'http://localhost:4000';
 
+
 function showAndUpdateUser(event) {
     event.preventDefault();
 
@@ -72,6 +73,37 @@ fetch(`${API_URL}/api/user`, {
 })
 }
 
+document.getElementById('userDeleteForm').addEventListener('submit', userDelete);
+
+
+function userDelete(event) {
+    event.preventDefault();
+
+    const password = document.getElementById('delPassword').value;
+    const yes = document.getElementById('yes');
+    const confirmation = yes.checked;
+
+fetch(`${API_URL}/api/user`, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ confirmation, password })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.error) {
+        showMessage(data.error)
+    } else {
+        showMessage(data.message, '#10E956')
+        console.log(data);
+        userLogout();
+        // setTimeout(function() {
+        //     window.location.href = './create.html';
+        // }, 7000);
+    }
+})
+}
 
 
 
