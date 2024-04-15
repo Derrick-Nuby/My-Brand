@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4000';
+const API_URL = 'https://derricks-brand.onrender.com';
 
 function fetchUsers() {
 fetch(`${API_URL}/api/user/all`)

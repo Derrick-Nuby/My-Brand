@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4000';
+const API_URL = 'https://derricks-brand.onrender.com';
 
 // Function to fetch and populate articles on page load
 function fetchAndPopulateArticles() {
