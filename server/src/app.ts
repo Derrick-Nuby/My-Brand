@@ -9,7 +9,7 @@ import likeRoutes from "./routes/like.js"
 import messageRoutes from "./routes/message.js"
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from '../swaggerConfig.js';
-import local from './files.js';
+// import local from './files.js';
 
 
 
@@ -18,18 +18,13 @@ dotenv.config();
 
 const app: Express = express()
 // const cors = corsMiddleware();
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://derrick-nuby.github.io');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+
 const PORT: string | number = process.env.PORT || 4000
 
-app.use(local)
+// app.use(local)
 app.use(cors({
-    origin: 'http://127.0.0.1:5500',
-    credentials: true // Allow credentials (cookies)
+  origin: ['http://localhost:4000', 'https://derrick-nuby.github.io'], // Allow both origins
+  credentials: true // Allow credentials (cookies)
 }));
 app.use(cookieParser());
 app.use(express.json());
