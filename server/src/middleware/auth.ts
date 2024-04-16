@@ -17,6 +17,7 @@ declare global {
 }
 
 const userAuthJWT = (req: Request, res: Response, next: NextFunction) => {
+  console.log('Cookies:', req.cookies);
   const token = req.cookies.jwt;
   // console.log(req.cookies.jwt);
   

@@ -23,8 +23,8 @@ const PORT: string | number = process.env.PORT || 4000
 
 // app.use(local)
 app.use(cors({
-  origin: ['http://localhost:4000', 'http://127.0.0.1:5500', 'http://localhost:5500/', 'https://derrick-nuby.github.io'], // Allow both origins
-  credentials: true // Allow credentials (cookies)
+  origin: ['http://localhost:4000', 'http://127.0.0.1:5500', 'http://localhost:5500/', 'https://derrick-nuby.github.io'],
+  credentials: true 
 }));
 app.use(cookieParser());
 app.use(express.json());
