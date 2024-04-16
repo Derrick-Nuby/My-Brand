@@ -99,17 +99,22 @@ function fetchCommentsByPost() {
         fetch(`${API_URL}/api/comment/article/${postId}`)
             .then(response => response.json())
             .then(data => {
-                if (data) {
+                if (data.error) {
+                    showMessage(data.error)
+                }else if (data) {
                     populateComments(data.comments);
                     // console.log(data.comments);
                 } else {
+                    showMessage(error)
                     console.error('No comments found for the blog post with ID:', postId);
                 }
             })
             .catch(error => {
+                showMessage(error)
                 console.error('Error fetching post related comments', error);
             });
     } else {
+        showMessage(error)
         console.error('No blog post ID provided in the URL.');
     }
 }

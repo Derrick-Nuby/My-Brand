@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET || 'defaultSecret';
 const userAuthJWT = (req, res, next) => {
+    console.log('Cookies:', req.cookies);
     const token = req.cookies.jwt;
     // console.log(req.cookies.jwt);
     if (token) {

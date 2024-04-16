@@ -25,7 +25,7 @@ function userLogin(event) {
         if ( data.user.isAdmin === false) {
             const { token } = data;
             const expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
-            document.cookie = `jwt=${token}; Path=/; Expires=${expiryDate};`;
+            document.cookie = `jwt=${token}; Path=/; Expires=${expiryDate}; SameSite=Lax; Secure`;
 
             localStorage.setItem('jwtToken', token);
 
