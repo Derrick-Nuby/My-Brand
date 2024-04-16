@@ -4,7 +4,10 @@ const API_URL = 'https://derricks-brand.onrender.com';
 function showAndUpdateUser(event) {
     event.preventDefault();
 
-fetch(`${API_URL}/api/user/you`)
+fetch(`${API_URL}/api/user/you`, {
+    method: 'GET',
+    credentials: 'include'
+})
     .then(response => response.json())
     .then(data => {
         if(data.error) {
