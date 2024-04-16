@@ -51,7 +51,7 @@ const getPostsComment = async (req, res) => {
         const blogId = req.params.id;
         const comments = await Comment.find({ blogId: blogId });
         if (comments.length === 0) {
-            return res.status(404).json({ message: "There are no currently no comments to view! Thank you for the visit :) " });
+            return res.status(404).json({ error: "There are no currently no comments to view! Thank you for the visit :) " });
         }
         return res.status(200).json({ comments });
     }
