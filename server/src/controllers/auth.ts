@@ -122,6 +122,16 @@ const deleteUser = async (req: Request, res: Response): Promise<any> => {
   try {
     const { password, confirmation } = req.body;
     const userId = req.userId;
+    // const isAdmin = req.isAdmin;
+
+    
+    // if (isAdmin === true) {
+    //   const deletedUser = await User.findOneAndDelete({ _id: userId });
+    //   return res.status(200).json({
+    //     message: 'User deleted successfully',
+    //     user: deletedUser,
+    //   });
+    // }
 
     if (!password || typeof confirmation !== 'boolean') {
       return res.status(400).json({ error: 'Password and confirmation are required' });
@@ -152,7 +162,13 @@ const deleteUser = async (req: Request, res: Response): Promise<any> => {
 };
 
 const logoutUser = (req: Request, res: Response): void => {
-  res.clearCookie('jwt');
+  if (!req.userId) {
+    res.status(401).json({ error: 'User is not logged in' });
+    return;
+  }
+  
+  res.clearCookie('jwt', { path: '/' });
+
   res.status(200).json({ message: 'User logged out successfully' });
 };
 
