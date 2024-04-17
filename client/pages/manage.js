@@ -1,12 +1,16 @@
-const API_URL = 'https://derricks-brand.onrender.com';
-
+// const API_URL = 'https://derricks-brand.onrender.com';
+const API_URL = 'http://localhost:4000';
+const cookie = document.cookie.split('jwt=')[1]
 
 function showAndUpdateUser(event) {
     event.preventDefault();
 
 fetch(`${API_URL}/api/user/you`, {
     method: 'GET',
-    credentials: 'include'
+    credentials: 'include',
+    headers: {
+        "Authorization": `Bearer ${cookie}`
+    }
 })
     .then(response => response.json())
     .then(data => {
@@ -61,7 +65,8 @@ function userUpdate(event) {
 fetch(`${API_URL}/api/user`, {
     method: 'PUT',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${cookie}`
     },
     body: JSON.stringify({ name, email, phone, password, confirmPassword })
 })
@@ -89,7 +94,8 @@ function userDelete(event) {
 fetch(`${API_URL}/api/user`, {
     method: 'DELETE',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${cookie}`
     },
     body: JSON.stringify({ confirmation, password })
 })
