@@ -1,7 +1,15 @@
-const API_URL = 'https://derricks-brand.onrender.com';
+// const API_URL = 'https://derricks-brand.onrender.com';
+const API_URL = 'http://localhost:4000';
+const cookie = document.cookie.split('jwt=')[1]
+
 
 function fetchComments() {
-fetch(`${API_URL}/api/comment/`)
+fetch(`${API_URL}/api/comment/`, {
+    method: 'GET',
+    headers: {
+        "Authorization": `Bearer ${cookie}`
+    }
+})
 .then(response => response.json())
 .then(data => {
     if (data) {
@@ -85,6 +93,7 @@ fetch(`${API_URL}/api/comment/${commentId}`, {
     method: 'DELETE',
     headers: {
         'Content-Type': 'application/json',
+        "Authorization": `Bearer ${cookie}`
     },
 })
 .then(response => response.json())
@@ -104,14 +113,19 @@ fetch(`${API_URL}/api/comment/${commentId}`, {
 }
 
 function fetchMessages() {
-fetch(`${API_URL}/api/message/`)
+fetch(`${API_URL}/api/message/`, {
+    method: 'GET',
+    headers: {
+        "Authorization": `Bearer ${cookie}`
+    }
+})
 .then(response => response.json())
 .then(data => {
-    if (data) {
-        populateMessages(data.messages);
-        console.log(data.messages);
+    if (data.error) {
+        showMessage(data.error)
     } else {
-        console.error('No messages found');
+        populateMessages(data.messages);
+        // console.log(data.messages);
     }
 })
 .catch(error => {
@@ -166,6 +180,44 @@ function populateMessages(messages) {
     });
 }
 
+const messagesContainer = document.querySelector('.realmessages');
+
+messagesContainer.addEventListener('click', function(event) {
+
+    if (event.target && event.target.id === 'deleteMessage') {
+        deleteMessage(event);
+    }
+});
+
+function deleteMessage(event) {
+    event.preventDefault();
+
+    const deleteButton = event.target;
+    const messageElement = deleteButton.closest('.comment');
+    const messageId = deleteButton.getAttribute('data-id');
+
+fetch(`${API_URL}/api/message/${messageId}`, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${cookie}`
+    },
+})
+.then(response => response.json())
+.then(data => {
+    if (data.error) {
+        showMessage(data.error)
+    } else {
+        messageElement.remove();
+        showMessage(data.message, '#10E956')
+    }
+})
+.catch(error => {
+    showMessage(error.message || error)
+
+})
+
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
