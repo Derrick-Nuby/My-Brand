@@ -125,7 +125,7 @@ const deleteComment = async (req: Request, res: Response): Promise<any> => {
             return;
         }
 
-        if (comment.authorId.toString() !== userId || isAdmin != true) {
+        if (comment.authorId.toString() !== userId && isAdmin !== true) {
             res.status(403).json({ error: "You do not own that comment and therefore cannot delete it." });
             return;
         }

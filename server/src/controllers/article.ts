@@ -71,7 +71,7 @@ const getSingleArticle = async (req: Request, res: Response): Promise<any> => {
         const singleArticle: IArticle | null = await Article.findOne( { _id: articleId });
 
         if(!singleArticle) {
-            return res.status(404).json({ message: "That article doesn't exist on our database"})
+            return res.status(404).json({ error: "That article doesn't exist on our database"})
         }
 
         res.status(200).json({ singleArticle })
@@ -90,7 +90,7 @@ const updateArticle = async (req: Request, res: Response): Promise<any> => {
         const updatedArticle: IArticle | null = await Article.findOneAndUpdate( { _id: articleId }, updateFields, { new: true });
 
         if (!updatedArticle) {
-            res.status(404).json({ message: "That article doesn't exist in our database" });
+            res.status(404).json({ error: "That article doesn't exist in our database" });
             return;
         }
 
@@ -109,7 +109,7 @@ const deleteArticle = async (req: Request, res: Response): Promise<any> => {
         const deletedArticle: IArticle | null = await Article.findOneAndDelete( { _id: articleId });
 
         if (!deletedArticle) {
-            res.status(404).json({ message: "That article doesn't exist in our database" });
+            res.status(404).json({ error: "That article doesn't exist in our database" });
             return;
         }
 

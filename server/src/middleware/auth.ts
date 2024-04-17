@@ -17,15 +17,29 @@ declare global {
 }
 
 const userAuthJWT = (req: Request, res: Response, next: NextFunction) => {
-  console.log('Cookies:', req.cookies);
-  const token = req.cookies.jwt;
-  // console.log(req.cookies.jwt);
-  
 
+  let token: string | undefined;
+
+  const authorizationHeader = req.headers.authorization;
+  
+  
+  if (authorizationHeader) {
+      const parts = authorizationHeader.split(' ');
+      if (parts.length === 2 && parts[0] === 'Bearer') {
+          token = parts[1];
+      }
+  } 
+  if (!token) {
+    token = req.cookies.jwt;
+  }
+  if (!token) {
+    return res.status(401).json({ error: 'Authentication required. Please log in.' });
+  }
+  
   if (token) {
     jwt.verify(token, 'jwtSecret', (err: any, decoded: any) => {
       if (err) {
-        return res.status(403).json({ message: 'Failed to authenticate token' });
+        return res.status(403).json({ error: 'Failed to authenticate token, Please Login again' });
       }
       const { id, username, isAdmin } = decoded;
       req.userId = id;
@@ -39,12 +53,28 @@ const userAuthJWT = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const adminAuthJWT = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.cookies.jwt;
+
+  let token: string | undefined;
+
+  const authorizationHeader = req.headers.authorization;
+  
+  if (authorizationHeader) {
+      const parts = authorizationHeader.split(' ');
+      if (parts.length === 2 && parts[0] === 'Bearer') {
+          token = parts[1];
+      }
+  } 
+  if (!token) {
+    token = req.cookies.jwt;
+  }
+  if (!token) {
+    return res.status(401).json({ error: 'Authentication required. Please log in.' });
+  }
 
   if (token) {
     jwt.verify(token, 'jwtSecret', (err: any, decoded: any) => {
       if (err) {
-        return res.status(403).json({ message: 'Failed to authenticate token' });
+        return res.status(403).json({ error: 'Failed to authenticate token, Please Login again' });
       }
       const { id, username, isAdmin } = decoded;
       req.userId = id;
