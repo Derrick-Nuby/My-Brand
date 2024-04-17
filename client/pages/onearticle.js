@@ -1,4 +1,7 @@
-const API_URL = 'https://derricks-brand.onrender.com';
+// const API_URL = 'https://derricks-brand.onrender.com';
+const API_URL = 'http://localhost:4000';
+const cookie = document.cookie.split('jwt=')[1]
+
 
 function fetchAndPopulateBlogPost() {
 
@@ -69,7 +72,8 @@ function createComment(event) {
     fetch(`${API_URL}/api/comment/`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${cookie}`
         },
         
         body: JSON.stringify({ blogId, content})
@@ -181,6 +185,9 @@ function toggleLike(event) {
     if (isLiked) {
         fetch(`${API_URL}/api/like/${blogId}`,  {
             method: 'DELETE',
+            headers: {
+                "Authorization": `Bearer ${cookie}`
+            }
         })
         .then(response => response.json())
         .then(data => {
@@ -198,6 +205,7 @@ function toggleLike(event) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                "Authorization": `Bearer ${cookie}`
             },
             body: JSON.stringify({
                 blogId: blogId,
@@ -228,7 +236,12 @@ function fetchLikesByPost() {
     const postId = urlParams.get('id');
 
     if (postId) {
-        fetch(`${API_URL}/api/like/count/${postId}`)
+        fetch(`${API_URL}/api/like/count/${postId}`, {
+            method: 'GET',
+            headers: {
+                "Authorization": `Bearer ${cookie}`
+        }
+        })
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -269,6 +282,7 @@ fetch(`${API_URL}/api/comment/${commentId}`, {
     method: 'DELETE',
     headers: {
         'Content-Type': 'application/json',
+        "Authorization": `Bearer ${cookie}`
     },
 })
 .then(response => response.json())
@@ -324,6 +338,7 @@ fetch(`${API_URL}/api/comment/${commentId}`, {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
+        "Authorization": `Bearer ${cookie}`
     },
     body: JSON.stringify({ blogId, content }),
 })
