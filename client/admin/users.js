@@ -1,18 +1,26 @@
-const API_URL = 'https://derricks-brand.onrender.com';
+// const API_URL = 'https://derricks-brand.onrender.com';
+const API_URL = 'http://localhost:4000';
+const cookie = document.cookie.split('jwt=')[1]
+
 
 function fetchUsers() {
-fetch(`${API_URL}/api/user/all`)
+fetch(`${API_URL}/api/user/all`, {
+    method: 'GET',
+    headers: {
+        "Authorization": `Bearer ${cookie}`
+    }
+})
 .then(response => response.json())
 .then(data => {
-    if (data) {
+    if (data.error) {
+        showMessage(data.error)
+    } else {
         populateUsers(data.users);
         // console.log(data.comments);
-    } else {
-        console.error('No users found');
     }
 })
 .catch(error => {
-    console.error('Error fetching users');
+    console.log(error);
 });
 
 }
@@ -66,6 +74,46 @@ function populateUsers(users) {
     });
 }
 
+
+const messagesContainer = document.querySelector('.realcomments');
+
+messagesContainer.addEventListener('click', function(event) {
+
+    if (event.target && event.target.id === 'deleteUser') {
+        deleteUser(event);
+    }
+});
+
+
+function deleteUser(event) {
+    event.preventDefault();
+
+    const deleteButton = event.target;
+    const userElement = deleteButton.closest('.comment');
+    const userId = deleteButton.getAttribute('data-id');
+
+fetch(`${API_URL}/api/user`, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${cookie}`
+    },
+})
+.then(response => response.json())
+.then(data => {
+    if (data.error) {
+        showMessage(data.error)
+    } else {
+        userElement.remove();
+        showMessage(data.message, '#10E956')
+    }
+})
+.catch(error => {
+    showMessage(error.message || error)
+
+})
+
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
