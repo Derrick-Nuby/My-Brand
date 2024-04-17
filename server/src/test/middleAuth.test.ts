@@ -3,6 +3,11 @@ import request from 'supertest';
 import jwt from 'jsonwebtoken';
 import app from '../app.js'; 
 
+after(function() {
+    process.exit();
+});
+
+
 describe('User Authentication Middleware', () => {
 
     it('should pass authentication and set user data in request object when valid token is provided', (done) => {
