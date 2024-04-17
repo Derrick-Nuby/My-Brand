@@ -1,4 +1,6 @@
-const API_URL = 'https://derricks-brand.onrender.com';
+// const API_URL = 'https://derricks-brand.onrender.com';
+const API_URL = 'http://localhost:4000';
+
 
 document.getElementById('contactform').addEventListener('submit', sendMessage);
 

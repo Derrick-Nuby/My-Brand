@@ -1,4 +1,7 @@
-const API_URL = 'https://derricks-brand.onrender.com';
+// const API_URL = 'https://derricks-brand.onrender.com';
+const API_URL = 'http://localhost:4000';
+const cookie = document.cookie.split('jwt=')[1]
+
 
 // document.getElementById('userLoginForm').addEventListener('submit', userLogin);
 
@@ -25,7 +28,7 @@ function userLogin(event) {
         if ( data.user.isAdmin === false) {
             const { token } = data;
             const expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
-            document.cookie = `jwt=${token}; Path=/; Expires=${expiryDate}; SameSite=Lax; Secure`;
+            document.cookie = `jwt=${token}; Path=/; Expires=${expiryDate};`;
 
             localStorage.setItem('jwtToken', token);
 
@@ -91,14 +94,18 @@ function userLogout(event){
     localStorage.removeItem('jwtToken');
     fetch(`${API_URL}/api/user/logout`, {
         method: 'GET',
-        credentials: 'include'
+        headers: {
+            "Authorization": `Bearer ${cookie}`
+        }
     })
     .then(response => response.json())
     .then(data => {
         if (data.error) {
             showError(data.error)
         } else {
-            showError(data.message, '10E956', 3000)
+            document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+            localStorage.removeItem('jwt');
+            showError(data.message, '#10E956', 3000)
         }
     })
     .catch(error => {
