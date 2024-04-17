@@ -23,12 +23,27 @@ jobs:
       - run:
           name: Run Tests
           command: cd server && npm test
+  deploy:
+    docker:
+      - image: cimg/node:21.7.1
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Render
+          command: |
+            curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer ${RENDER_API_KEY}" -d '{"branch":"main"}' https://api.render.com/deploy/srv-co5tlqu3e1ms73bbpkeg?key={RENDER_REAL-DEPLOY_HOOK}
+
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
-      - test:
+      - test
+      - deploy:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - main
