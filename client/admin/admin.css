@@ -279,7 +279,27 @@ input[type=submit]:hover {
     height: 200px;
 }
 
+#deleteUser {
+    cursor: pointer;
+}
 
+.heigh {
+    height: 90vh;
+}
+
+#editArticle, #deleteArticle {
+    color: var(--btext);
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: var(--hover);
+    border-radius: 7px;
+    margin: 0px 5px;
+}
+
+#editArticle:hover, #deleteArticle:hover {
+    color: var(--mtext);
+    background-color: var(--bgcolor);
+}
 
 
 

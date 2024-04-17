@@ -45,6 +45,7 @@
                     <input type="text" name="title" id="title">
                     <label for="description">Blog Post</label>
                     <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                    <input type="hidden" id="articleId" name="articleId">
 
                     <center><input type="submit" value="Post"></center>
                 </form>
@@ -58,7 +59,7 @@
         </div>
 
         <div class="myarticles pdtp">
-            <div class="articlesitems">
+            <div class="articlesitems" id="realarticles">
                 <div class="article article1">
                     <img src="../images/blog1.png" alt="">
                     <div class="artitle code"><a href="./post001.html">Hello World Article Number one</a></div>
