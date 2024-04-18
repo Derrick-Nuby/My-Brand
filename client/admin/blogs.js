@@ -183,11 +183,21 @@ function updateArticle(event) {
     event.preventDefault();
 
     const form = event.target;
-    // const formData = new FormData(form);
+    const articleId = form.querySelector('#articleId').value;
+
+    const formData = new FormData(form);
+
+    const blogImage = document.getElementById('blogimage').files[0];
+    if (blogImage) {
+        formData.append('image', blogImage);
+    }
+
     const title = document.getElementById('title')
     const description = document.getElementById('description')
 
-    const articleId = form.querySelector('#articleId').value;
+    formData.append('title', title);
+    formData.append('description', description);
+
 
 if (articleId) {
     fetch(`${API_URL}/api/article/${articleId}`, {
@@ -196,7 +206,7 @@ if (articleId) {
             "Authorization": `Bearer ${cookie}`,
             // "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, description})
+        body: formData,
     })
     .then(response => response.json())
     .then(data => {
@@ -206,6 +216,7 @@ if (articleId) {
         } else {
             showMessage(data.message, '#10E956')
             fetchAndPopulateArticles()
+            form.reset()
         }
     })
     .catch(error => {

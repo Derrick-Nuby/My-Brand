@@ -179,7 +179,7 @@ router.get("/:id", getSingleArticle);
  *       '500':
  *         description: Error sending email
  */
-router.put("/:id", adminAuthJWT, updateArticle);
+router.put("/:id", adminAuthJWT, upload.single('image'), updateArticle);
 /**
  * @swagger
  * /api/article/{id}:
