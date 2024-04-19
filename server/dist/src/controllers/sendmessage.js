@@ -1,18 +1,8 @@
 import nodemailer from 'nodemailer';
-import Article from '../models/article.js';
 import dotenv from 'dotenv';
 dotenv.config();
-const sendLatestArticle = async (recipientEmail, latestArticle) => {
+const sendLatestArticle = async (emails, latestArticle) => {
     try {
-        // Fetch the latest article if it wasn't passed as an argument
-        let article;
-        if (latestArticle) {
-            article = latestArticle;
-        }
-        else {
-            const articles = await Article.find().sort({ timestamp: -1 }).limit(1);
-            article = articles[0];
-        }
         // Create a Nodemailer transporter
         const transporter = nodemailer.createTransport({
             host: process.env.mailHost,
@@ -23,16 +13,21 @@ const sendLatestArticle = async (recipientEmail, latestArticle) => {
                 pass: process.env.adminPass,
             },
         });
-        // Email options
-        const mailOptions = {
+        // Email options template
+        const mailOptionsTemplate = {
             from: process.env.adminEmail,
-            to: recipientEmail,
-            subject: `Latest Article: ${article.title}`,
-            text: `Here's the latest article:\n\nTitle: ${article.title}\n\nContent: ${article.description}\n\nTimestamp: ${article.timestamp}`, // Include article details in the email body
+            subject: `Latest Article: ${latestArticle.title}`,
+            text: `Here's the latest article:\n\nTitle: ${latestArticle.title}\n\nDescription: ${latestArticle.description}\n\nTimestamp: ${latestArticle.timestamp}`,
         };
-        // Send the email
-        await transporter.sendMail(mailOptions);
-        console.log(`Email sent to ${recipientEmail}:`, `Subject: ${mailOptions.subject}`);
+        // Iterate over each email and send the article
+        for (const email of emails) {
+            const mailOptions = {
+                ...mailOptionsTemplate,
+                to: email,
+            };
+            await transporter.sendMail(mailOptions);
+            console.log(`Email sent to ${email}:`, `Subject: ${mailOptions.subject}`);
+        }
     }
     catch (error) {
         console.error('Error sending latest article email:', error);

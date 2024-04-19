@@ -2,6 +2,8 @@ import { Response, Request, NextFunction  } from "express"
 import { IArticle } from "../types/article.js"
 import Article from "../models/article.js"
 import { sendLatestArticle } from "./sendmessage.js"
+import { IUser } from "../types/user.js"
+import User from "../models/user.js"
 import dotenv from 'dotenv';
 import multer from 'multer';
 dotenv.config();
@@ -59,9 +61,13 @@ const createArticle = async (req: Request, res: Response): Promise<any> => {
     res
         .status(201)
         .json({ message: "Article created successfully", article: newArticle})
+
+        const users = await User.find();
+        const emails = users.map(user => user.email);
+        await sendLatestArticle(emails, newArticle);
         
-        const recipientEmail = 'iradukundaderrick7@gmail.com';
-        await sendLatestArticle(recipientEmail, newArticle);
+        // const recipientEmail = 'iradukundaderrick7@gmail.com';
+        // await sendLatestArticle(recipientEmail, newArticle);
         
         // next();
     } catch (error) {

@@ -1,5 +1,6 @@
 import Article from "../models/article.js";
 import { sendLatestArticle } from "./sendmessage.js";
+import User from "../models/user.js";
 import dotenv from 'dotenv';
 dotenv.config();
 import cloudinary from 'cloudinary';
@@ -42,8 +43,11 @@ const createArticle = async (req, res) => {
         res
             .status(201)
             .json({ message: "Article created successfully", article: newArticle });
-        const recipientEmail = 'iradukundaderrick7@gmail.com';
-        await sendLatestArticle(recipientEmail, newArticle);
+        const users = await User.find();
+        const emails = users.map(user => user.email);
+        await sendLatestArticle(emails, newArticle);
+        // const recipientEmail = 'iradukundaderrick7@gmail.com';
+        // await sendLatestArticle(recipientEmail, newArticle);
         // next();
     }
     catch (error) {
