@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
-import Artcile from '../models/article.js'
+import Article from '../models/article.js'
 import mongoose from 'mongoose';
 
 const commentSchema = Joi.object({
@@ -48,7 +48,7 @@ const validateComment = async (req: Request, res: Response, next: NextFunction) 
     }
 
     
-    const article = await Artcile.findById(blogId);
+    const article = await Article.findById(blogId);
     if (!article) {
       return res.status(404).json({ message: 'The specified article does not exist' });
     }
