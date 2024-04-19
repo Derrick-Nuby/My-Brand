@@ -95,46 +95,23 @@ const getSingleArticle = async (req: Request, res: Response): Promise<any> => {
 
 const updateArticle = async (req: Request, res: Response): Promise<any> => {
     try {
+
         const articleId = req.params.id;
+        const updateFields = req.body;
 
-        const existingArticle: IArticle | null = await Article.findById(articleId);
-
-        if (!existingArticle) {
-            return res.status(404).json({ error: "Article not found" });
-        }
-
-        const updates: Partial<IArticle> = {};
-
-        if (req.file) {
-            const cloudinaryResponse = await cloudinary.v2.uploader.upload(req.file.path, {
-                folder: 'brandImages'
-            });
-            updates.image = cloudinaryResponse.secure_url;
-        }
-
-        const { title, description } = req.body as Pick<IArticle, 'title' | 'description'>;
-
-        if (title !== undefined) {
-            updates.title = title;
-        }
-
-        if (description !== undefined) {
-            updates.description = description;
-        }
-
-        const updatedArticle: IArticle | null = await Article.findByIdAndUpdate(articleId, updates, { new: true });
+        const updatedArticle: IArticle | null = await Article.findOneAndUpdate( { _id: articleId }, updateFields, { new: true });
 
         if (!updatedArticle) {
-            return res.status(404).json({ error: "Article not found" });
+            res.status(404).json({ message: "That article doesn't exist in our database" });
+            return;
         }
 
-        res.status(200).json({ message: "Article updated successfully", article: updatedArticle });
+        res.status(200).json({ message: "Article Updated successfully", updatedArticle })
 
     } catch (error) {
-        console.error('Error updating article:', error);
-        res.status(500).json({ error: "Internal Server Error" });
+    throw error
     }
-};
+}
 
 const deleteArticle = async (req: Request, res: Response): Promise<any> => {
     try {
