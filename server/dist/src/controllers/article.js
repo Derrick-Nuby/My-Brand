@@ -1,4 +1,5 @@
 import Article from "../models/article.js";
+import { sendLatestArticle } from "./sendmessage.js";
 import dotenv from 'dotenv';
 dotenv.config();
 import cloudinary from 'cloudinary';
@@ -12,6 +13,7 @@ const getAllArticles = async (req, res) => {
         const articles = await Article.find();
         if (articles.length === 0) {
             res.status(404).json({ message: "There are currently no articles to view! Thank you for the visit :) " });
+            return;
         }
         res.status(200).json({ articles });
     }
@@ -40,6 +42,8 @@ const createArticle = async (req, res) => {
         res
             .status(201)
             .json({ message: "Article created successfully", article: newArticle });
+        const recipientEmail = 'iradukundaderrick7@gmail.com';
+        await sendLatestArticle(recipientEmail, newArticle);
         // next();
     }
     catch (error) {

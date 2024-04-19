@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import Artcile from '../models/article.js';
+import Article from '../models/article.js';
 import mongoose from 'mongoose';
 const commentSchema = Joi.object({
     authorId: Joi.string()
@@ -35,7 +35,7 @@ const validateComment = async (req, res, next) => {
         if (!mongoose.Types.ObjectId.isValid(blogId)) {
             return res.status(400).json({ message: 'Invalid blogId format' });
         }
-        const article = await Artcile.findById(blogId);
+        const article = await Article.findById(blogId);
         if (!article) {
             return res.status(404).json({ message: 'The specified article does not exist' });
         }

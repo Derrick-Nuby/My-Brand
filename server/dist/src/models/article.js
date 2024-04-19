@@ -24,5 +24,5 @@ const articleSchema = new Schema({
         default: Date.now,
     },
 });
-export default model("Artcile", articleSchema);
+export default model("Article", articleSchema);
 //# sourceMappingURL=article.js.map

@@ -180,6 +180,7 @@ router.get("/:id", getSingleArticle);
  *         description: Error sending email
  */
 router.put("/:id", adminAuthJWT, upload.single('image'), updateArticle);
+// router.get('/find', findArticles);
 /**
  * @swagger
  * /api/article/{id}:
