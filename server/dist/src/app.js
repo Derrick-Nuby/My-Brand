@@ -7,6 +7,7 @@ import articleRoutes from "./routes/article.js";
 import commentRoutes from "./routes/comment.js";
 import likeRoutes from "./routes/like.js";
 import messageRoutes from "./routes/message.js";
+import authRoutes from "./routes/logged.js";
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from '../swaggerConfig.js';
 // import local from './files.js';
@@ -23,6 +24,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(express.json());
+app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/article', articleRoutes);
 app.use('/api/comment', commentRoutes);

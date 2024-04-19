@@ -15,7 +15,8 @@ const userAuthJWT = (req, res, next) => {
         token = req.cookies.jwt;
     }
     if (!token) {
-        return res.status(401).json({ error: 'Authentication required. Please log in.' });
+        res.status(401).json({ error: 'Authentication required. Please log in.' });
+        return;
     }
     if (token) {
         jwt.verify(token, 'jwtSecret', (err, decoded) => {
