@@ -19,7 +19,7 @@ const createLike = async (req, res) => {
         const like = new Like({
             authorId: userId,
             authorName: lUsername,
-            blogId: body.blogId,
+            itemId: body.itemId,
             liked: body.liked,
         });
         const newLike = await like.save();
@@ -48,8 +48,8 @@ const updateLike = async (req, res) => {
 };
 const likeCounter = async (req, res) => {
     try {
-        const blogId = req.params.id;
-        const likeCount = await Like.countDocuments({ blogId, liked: true });
+        const itemId = req.params.id;
+        const likeCount = await Like.countDocuments({ itemId, liked: true });
         res.status(200).json({ likeCount });
     }
     catch (error) {
@@ -58,9 +58,9 @@ const likeCounter = async (req, res) => {
 };
 const deleteLike = async (req, res) => {
     try {
-        const blogId = req.params.id;
+        const itemId = req.params.id;
         const authorId = req.userId;
-        const deletedLike = await Like.findOneAndDelete({ blogId, authorId });
+        const deletedLike = await Like.findOneAndDelete({ itemId, authorId });
         if (!deletedLike) {
             res.status(404).json({ message: "That like doesn't exist in our database" });
             return;
