@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import userRoutes from "./routes/auth.js"
 import articleRoutes from "./routes/article.js"
 import commentRoutes from "./routes/comment.js"
+import replyRoutes from "./routes/reply.js"
 import likeRoutes from "./routes/like.js"
 import messageRoutes from "./routes/message.js"
 import authRoutes from "./routes/logged.js"
@@ -34,6 +35,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/article', articleRoutes)
 app.use('/api/comment', commentRoutes)
+app.use('/api/reply', replyRoutes)
 app.use('/api/like', likeRoutes)
 app.use('/api/message', messageRoutes)
 // swaggerSetup(app);
