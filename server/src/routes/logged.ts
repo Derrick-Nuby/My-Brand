@@ -1,11 +1,11 @@
 import { Router } from "express"
-import { adminAuthJWT, userAuthJWT } from '../middleware/auth.js';
+import { loggedAdminAuth, loggedUserAuth } from '../middleware/auth.js';
 
 const router: Router = Router()
 
-router.get("/authuser", userAuthJWT)
+router.get("/authuser", loggedUserAuth)
 
-router.get("/authadmin", adminAuthJWT)
+router.get("/authadmin", loggedAdminAuth)
 
 
 
