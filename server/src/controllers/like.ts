@@ -21,7 +21,7 @@ const getAllLikes = async (req: Request, res: Response): Promise<any> => {
 
 const createLike = async (req: Request, res: Response): Promise<any> => {
     try {
-        const body = req.body as Pick<ILike, "blogId" | "liked">
+        const body = req.body as Pick<ILike, "itemId" | "liked">
 
         const userId = req.userId;
         const lUsername = req.lUsername;
@@ -29,7 +29,7 @@ const createLike = async (req: Request, res: Response): Promise<any> => {
         const like: ILike = new Like({
             authorId: userId,
             authorName: lUsername,
-            blogId: body.blogId,
+            itemId: body.itemId,
             liked: body.liked,
         })
 
@@ -67,9 +67,9 @@ const updateLike = async (req: Request, res: Response): Promise<any> => {
 const likeCounter = async (req: Request, res: Response) => {
     try {
 
-        const blogId = req.params.id;
+        const itemId = req.params.id;
 
-        const likeCount = await Like.countDocuments({ blogId, liked: true });
+        const likeCount = await Like.countDocuments({ itemId, liked: true });
         res.status(200).json({ likeCount });
     
     } catch (error) {
@@ -81,11 +81,11 @@ const likeCounter = async (req: Request, res: Response) => {
 const deleteLike = async (req: Request, res: Response): Promise<any> => {
     try {
 
-        const blogId = req.params.id;
+        const itemId = req.params.id;
         const authorId = req.userId;
 
 
-        const deletedLike: ILike | null = await Like.findOneAndDelete( { blogId, authorId });
+        const deletedLike: ILike | null = await Like.findOneAndDelete( { itemId, authorId });
 
         if (!deletedLike) {
             res.status(404).json({ message: "That like doesn't exist in our database" });

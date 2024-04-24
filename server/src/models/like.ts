@@ -12,7 +12,7 @@ const likeSchema: Schema = new Schema(
         type: String,
     },
 
-    blogId: {
+    itemId: {
         type: Types.ObjectId,
         ref: 'Article',
     },
