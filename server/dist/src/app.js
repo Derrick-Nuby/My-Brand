@@ -19,7 +19,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 // app.use(local)
 app.use(cors({
-    origin: ['*', 'http://127.0.0.1:5500', 'https://derrick-nuby.github.io', 'https://derricks-portfolio.netlify.app'],
+    origin: ['*', 'https://derricks-brand.onrender.com', 'http://127.0.0.1:5500', 'https://derrick-nuby.github.io', 'https://derricks-portfolio.netlify.app'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
