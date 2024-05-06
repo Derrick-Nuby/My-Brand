@@ -1,4 +1,4 @@
-import { IArticle } from "./../types/article";
+import { IArticle } from "../types/article";
 import { model, Schema, Types } from "mongoose";
 
 const articleSchema: Schema = new Schema(

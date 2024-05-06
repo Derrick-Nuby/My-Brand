@@ -1,4 +1,4 @@
-import { ILike } from "./../types/like";
+import { ILike } from "../types/like";
 import { model, Schema, Types } from "mongoose";
 
 const likeSchema: Schema = new Schema(

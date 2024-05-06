@@ -1,4 +1,4 @@
-import { IReply } from "./../types/reply";
+import { IReply } from "../types/reply";
 import { model, Schema, Types } from "mongoose";
 
 const replySchema: Schema = new Schema(
